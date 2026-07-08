@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gerobak Ku | Gerobak Berkah Untuk Kita Semua</title>
     <meta name="description" content="Jasa pembuatan gerobak profesional untuk mall, food court, dan bisnis kuliner. Gerobak FnB, Kiosk Counter Mall, Custom Design.">
-    <meta name="keywords" content="gerobak, kiosk, mall, food court, gerobak custom, pembuatan gerobak, booth">
+    <meta name="keywords" content="gerobak, kiosk, mall, food court, gerobak custom, pembuatan gerobak, booth, gerobak surabaya">
 
     <!-- Open Graph -->
     <meta property="og:type" content="website">
@@ -31,9 +31,12 @@
                         'silver-light': '#E8E8E8',
                         'silver-dark': '#808080',
                         cream: '#FFF8E7',
-                        'brown-dark': '#3D2B1F',
-                        'brown-mid': '#6B4226',
+                        'brown-dark': '#1A120B',
+                        'brown-mid': '#2A1F14',
+                        'brown-light': '#3D2B1F',
                         accent: '#D4A843',
+                        'accent-light': '#E8C860',
+                        gold: '#FFD700',
                     },
                     fontFamily: {
                         heading: ['Playfair Display', 'serif'],
@@ -47,38 +50,70 @@
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@600;700;800;900&display=swap" rel="stylesheet">
 
     <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
 
-    <style type="text/tailwindcss">
-        @layer base {
-            body {
-                @apply font-body antialiased text-gray-800;
-            }
-        }
+    <style>
+        /* ===== BASE ===== */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; background: #1A120B; color: #E8E8E8; overflow-x: hidden; }
 
-        /* Animations */
+        /* ===== PRELOADER ===== */
+        #preloader {
+            position: fixed; inset: 0; z-index: 9999;
+            background: linear-gradient(135deg, #1A120B 0%, #2A1F14 50%, #1A120B 100%);
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            transition: opacity 0.8s ease, visibility 0.8s ease;
+        }
+        #preloader.loaded { opacity: 0; visibility: hidden; pointer-events: none; }
+        .loader-cart {
+            width: 80px; height: 80px;
+            animation: loaderBounce 1.2s ease-in-out infinite;
+        }
+        @keyframes loaderBounce {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            25% { transform: translateY(-20px) rotate(-5deg); }
+            50% { transform: translateY(0) rotate(0deg); }
+            75% { transform: translateY(-10px) rotate(3deg); }
+        }
+        .loader-bar {
+            width: 200px; height: 3px; background: rgba(255,255,255,0.1);
+            border-radius: 999px; margin-top: 30px; overflow: hidden;
+        }
+        .loader-bar::after {
+            content: ''; display: block; width: 0; height: 100%;
+            background: linear-gradient(90deg, #D4A843, #FFD700, #D4A843);
+            border-radius: 999px;
+            animation: loaderProgress 2s ease forwards;
+        }
+        @keyframes loaderProgress { to { width: 100%; } }
+
+        /* ===== ANIMATIONS ===== */
         @keyframes fade-up {
-            from { opacity: 0; transform: translateY(40px); }
+            from { opacity: 0; transform: translateY(50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes fade-down {
+            from { opacity: 0; transform: translateY(-30px); }
             to { opacity: 1; transform: translateY(0); }
         }
         @keyframes fade-left {
-            from { opacity: 0; transform: translateX(-40px); }
+            from { opacity: 0; transform: translateX(-50px); }
             to { opacity: 1; transform: translateX(0); }
         }
         @keyframes fade-right {
-            from { opacity: 0; transform: translateX(40px); }
+            from { opacity: 0; transform: translateX(50px); }
             to { opacity: 1; transform: translateX(0); }
         }
         @keyframes scale-in {
-            from { opacity: 0; transform: scale(0.8); }
+            from { opacity: 0; transform: scale(0.85); }
             to { opacity: 1; transform: scale(1); }
         }
         @keyframes float {
             0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-12px); }
+            50% { transform: translateY(-14px); }
         }
         @keyframes shimmer {
             0% { background-position: -200% center; }
@@ -86,32 +121,41 @@
         }
         @keyframes pulse-ring {
             0% { transform: scale(1); opacity: 1; }
-            100% { transform: scale(1.5); opacity: 0; }
+            100% { transform: scale(1.6); opacity: 0; }
+        }
+        @keyframes spin-slow {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        @keyframes typing {
+            from { width: 0; }
+            to { width: 100%; }
+        }
+        @keyframes blink-cursor {
+            0%, 100% { border-color: #D4A843; }
+            50% { border-color: transparent; }
+        }
+        @keyframes marquee {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+        @keyframes glow-pulse {
+            0%, 100% { box-shadow: 0 0 20px rgba(212, 168, 67, 0.2); }
+            50% { box-shadow: 0 0 40px rgba(212, 168, 67, 0.4); }
         }
 
-        .animate-fade-up {
-            animation: fade-up 0.8s ease-out forwards;
-            opacity: 0;
-        }
-        .animate-fade-left {
-            animation: fade-left 0.8s ease-out forwards;
-            opacity: 0;
-        }
-        .animate-fade-right {
-            animation: fade-right 0.8s ease-out forwards;
-            opacity: 0;
-        }
-        .animate-scale-in {
-            animation: scale-in 0.6s ease-out forwards;
-            opacity: 0;
-        }
-        .animate-float {
-            animation: float 4s ease-in-out infinite;
-        }
+        .animate-fade-up { animation: fade-up 0.8s ease-out forwards; opacity: 0; }
+        .animate-fade-down { animation: fade-down 0.6s ease-out forwards; opacity: 0; }
+        .animate-fade-left { animation: fade-left 0.8s ease-out forwards; opacity: 0; }
+        .animate-fade-right { animation: fade-right 0.8s ease-out forwards; opacity: 0; }
+        .animate-scale-in { animation: scale-in 0.6s ease-out forwards; opacity: 0; }
+        .animate-float { animation: float 4s ease-in-out infinite; }
+        .animate-spin-slow { animation: spin-slow 20s linear infinite; }
+        .animate-glow { animation: glow-pulse 3s ease-in-out infinite; }
+
         .animate-shimmer {
             background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
-            background-size: 200% 100%;
-            animation: shimmer 3s infinite;
+            background-size: 200% 100%; animation: shimmer 3s infinite;
         }
 
         .delay-100 { animation-delay: 0.1s; }
@@ -122,69 +166,220 @@
         .delay-600 { animation-delay: 0.6s; }
         .delay-700 { animation-delay: 0.7s; }
         .delay-800 { animation-delay: 0.8s; }
+        .delay-1000 { animation-delay: 1s; }
 
-        /* Scroll animation observer */
+        /* ===== SCROLL REVEAL ===== */
         .reveal {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+            opacity: 0; transform: translateY(40px);
+            transition: all 0.9s cubic-bezier(0.16, 1, 0.3, 1);
         }
-        .reveal.visible {
-            opacity: 1;
-            transform: translateY(0);
+        .reveal.visible { opacity: 1; transform: translateY(0); }
+        .reveal-left {
+            opacity: 0; transform: translateX(-50px);
+            transition: all 0.9s cubic-bezier(0.16, 1, 0.3, 1);
         }
+        .reveal-left.visible { opacity: 1; transform: translateX(0); }
+        .reveal-right {
+            opacity: 0; transform: translateX(50px);
+            transition: all 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .reveal-right.visible { opacity: 1; transform: translateX(0); }
+        .reveal-scale {
+            opacity: 0; transform: scale(0.85);
+            transition: all 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .reveal-scale.visible { opacity: 1; transform: scale(1); }
 
-        /* Glass effect */
+        /* ===== GLASS ===== */
         .glass {
-            background: rgba(255, 255, 255, 0.08);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border: 1px solid rgba(255, 255, 255, 0.12);
+            background: rgba(255, 255, 255, 0.06);
+            backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .glass-strong {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(30px); -webkit-backdrop-filter: blur(30px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
         }
 
-        /* Custom scrollbar */
-        ::-webkit-scrollbar { width: 8px; }
-        ::-webkit-scrollbar-track { background: #1a1a1a; }
-        ::-webkit-scrollbar-thumb { background: #8B6914; border-radius: 4px; }
-        ::-webkit-scrollbar-thumb:hover { background: #D4A843; }
+        /* ===== SCROLLBAR ===== */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #1A120B; }
+        ::-webkit-scrollbar-thumb { background: linear-gradient(180deg, #D4A843, #8B6914); border-radius: 3px; }
 
-        /* WhatsApp button pulse */
-        .wa-pulse::before {
-            content: '';
-            position: absolute;
-            inset: -4px;
-            border-radius: 9999px;
-            background: #25D366;
-            animation: pulse-ring 2s ease-out infinite;
-            z-index: -1;
+        /* ===== NAVBAR ===== */
+        .nav-link {
+            position: relative; color: rgba(232,232,232,0.7);
+            transition: color 0.3s ease;
         }
+        .nav-link:hover { color: #D4A843; }
+        .nav-link::after {
+            content: ''; position: absolute; bottom: -4px; left: 0;
+            width: 0; height: 2px; background: #D4A843;
+            transition: width 0.3s ease;
+        }
+        .nav-link:hover::after { width: 100%; }
+        .nav-link.active { color: #D4A843; }
+        .nav-link.active::after { width: 100%; }
 
-        /* Card hover glow */
+        /* ===== CARD EFFECTS ===== */
         .card-glow {
-            transition: all 0.4s ease;
+            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+            position: relative;
         }
+        .card-glow::before {
+            content: ''; position: absolute; inset: 0; border-radius: inherit;
+            background: linear-gradient(135deg, rgba(212,168,67,0.1), transparent, rgba(212,168,67,0.05));
+            opacity: 0; transition: opacity 0.5s ease; z-index: 0; pointer-events: none;
+        }
+        .card-glow:hover::before { opacity: 1; }
         .card-glow:hover {
-            box-shadow: 0 0 30px rgba(212, 168, 67, 0.2), 0 20px 60px rgba(0,0,0,0.15);
-            transform: translateY(-8px);
+            box-shadow: 0 0 40px rgba(212, 168, 67, 0.15), 0 25px 80px rgba(0,0,0,0.3);
+            transform: translateY(-10px);
         }
 
-        /* Hero particles */
+        /* ===== WA BUTTON ===== */
+        .wa-pulse::before {
+            content: ''; position: absolute; inset: -4px;
+            border-radius: 9999px; background: #25D366;
+            animation: pulse-ring 2s ease-out infinite; z-index: -1;
+        }
+
+        /* ===== PARTICLES ===== */
         .particle {
-            position: absolute;
-            width: 4px;
-            height: 4px;
-            background: rgba(212, 168, 67, 0.4);
-            border-radius: 50%;
+            position: absolute; width: 3px; height: 3px;
+            background: rgba(212, 168, 67, 0.3); border-radius: 50%;
             animation: float 6s ease-in-out infinite;
         }
 
-        /* Smooth image loading */
-        img {
-            transition: opacity 0.3s ease;
+        /* ===== HERO TYPING ===== */
+        .typing-text {
+            display: inline-block; overflow: hidden; white-space: nowrap;
+            border-right: 3px solid #D4A843;
+            animation: typing 2.5s steps(25) 1s forwards, blink-cursor 0.8s step-end infinite;
+            width: 0;
+        }
+
+        /* ===== MARQUEE ===== */
+        .marquee-track {
+            display: flex; gap: 3rem; width: max-content;
+            animation: marquee 30s linear infinite;
+        }
+        .marquee-track:hover { animation-play-state: paused; }
+
+        /* ===== GALLERY LIGHTBOX ===== */
+        #lightbox {
+            position: fixed; inset: 0; z-index: 9000;
+            background: rgba(0,0,0,0.95); backdrop-filter: blur(20px);
+            display: flex; align-items: center; justify-content: center;
+            opacity: 0; visibility: hidden; transition: all 0.4s ease;
+        }
+        #lightbox.active { opacity: 1; visibility: visible; }
+        #lightbox img {
+            max-width: 90vw; max-height: 85vh; object-fit: contain;
+            border-radius: 16px; transform: scale(0.9);
+            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        #lightbox.active img { transform: scale(1); }
+
+        /* ===== BACK TO TOP ===== */
+        #backToTop {
+            position: fixed; bottom: 90px; right: 24px; z-index: 49;
+            width: 48px; height: 48px; border-radius: 50%;
+            background: linear-gradient(135deg, #D4A843, #8B6914);
+            display: flex; align-items: center; justify-content: center;
+            opacity: 0; visibility: hidden; transform: translateY(20px);
+            transition: all 0.4s ease; cursor: pointer; border: none;
+            box-shadow: 0 4px 20px rgba(212,168,67,0.3);
+        }
+        #backToTop.visible { opacity: 1; visibility: visible; transform: translateY(0); }
+        #backToTop:hover { transform: translateY(-4px) scale(1.1); }
+
+        /* ===== FAQ ACCORDION ===== */
+        .faq-answer {
+            max-height: 0; overflow: hidden;
+            transition: max-height 0.5s cubic-bezier(0.16, 1, 0.3, 1), padding 0.3s ease;
+        }
+        .faq-item.active .faq-answer { max-height: 300px; }
+        .faq-item.active .faq-icon { transform: rotate(45deg); }
+        .faq-icon { transition: transform 0.3s ease; }
+
+        /* ===== TESTIMONIAL SLIDER ===== */
+        .testimonial-track {
+            display: flex; transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        /* ===== PARALLAX ===== */
+        .parallax-bg {
+            background-attachment: fixed; background-size: cover;
+            background-position: center; background-repeat: no-repeat;
+        }
+        @media (max-width: 768px) {
+            .parallax-bg { background-attachment: scroll; }
+        }
+
+        /* ===== SMOOTH IMG ===== */
+        img { transition: opacity 0.3s ease, transform 0.5s ease; }
+
+        /* ===== FILTER TABS ===== */
+        .filter-btn {
+            transition: all 0.3s ease;
+        }
+        .filter-btn.active {
+            background: #D4A843; color: #1A120B; font-weight: 700;
+        }
+        .filter-btn:not(.active) {
+            background: rgba(255,255,255,0.06); color: rgba(255,255,255,0.6);
+        }
+        .filter-btn:not(.active):hover {
+            background: rgba(255,255,255,0.12); color: #D4A843;
+        }
+
+        /* ===== MOBILE MENU ===== */
+        #mobileMenu {
+            transform: translateX(100%);
+            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        #mobileMenu.open { transform: translateX(0); }
+
+        /* ===== SECTION DIVIDER ===== */
+        .section-divider {
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(212,168,67,0.3), transparent);
+        }
+
+        /* ===== TILT CARD ===== */
+        .tilt-card {
+            transform-style: preserve-3d;
+            perspective: 1000px;
+        }
+
+        /* ===== CUSTOM SELECTION ===== */
+        ::selection {
+            background: rgba(212,168,67,0.3); color: #fff;
         }
     </style>
 </head>
-<body class="bg-brown-dark overflow-x-hidden">
+<body>
+
+    <!-- ==================== PRELOADER ==================== -->
+    <div id="preloader">
+        <img src="images/logo.svg" alt="Loading..." class="loader-cart">
+        <p class="text-accent/80 text-sm mt-6 font-medium tracking-widest uppercase">Gerobak Ku</p>
+        <div class="loader-bar"></div>
+    </div>
+
+    <!-- ==================== LIGHTBOX ==================== -->
+    <div id="lightbox" onclick="closeLightbox()">
+        <button onclick="closeLightbox()" class="absolute top-6 right-6 text-white/70 hover:text-white transition-colors z-10">
+            <i data-lucide="x" class="w-8 h-8"></i>
+        </button>
+        <img id="lightboxImg" src="" alt="Preview">
+        <div class="absolute bottom-8 left-0 right-0 text-center">
+            <p id="lightboxCaption" class="text-white font-semibold text-lg"></p>
+            <p id="lightboxSub" class="text-white/50 text-sm mt-1"></p>
+        </div>
+    </div>
 
     <!-- ==================== NAVIGATION ==================== -->
     <nav id="navbar" class="fixed top-0 w-full z-50 transition-all duration-500">
@@ -192,7 +387,10 @@
             <div class="flex justify-between items-center py-4">
                 <!-- Logo -->
                 <a href="#" class="flex items-center gap-3 group">
-                    <img src="images/logo.svg" alt="Gerobak Ku Logo" class="w-12 h-12 rounded-full ring-2 ring-accent/30 group-hover:ring-accent transition-all duration-300">
+                    <div class="relative">
+                        <img src="images/logo.svg" alt="Gerobak Ku Logo" class="w-12 h-12 rounded-full ring-2 ring-accent/30 group-hover:ring-accent transition-all duration-300">
+                        <div class="absolute -inset-1 rounded-full bg-accent/20 blur-md opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    </div>
                     <div>
                         <span class="text-xl font-heading font-bold text-white tracking-wide">GEROBAK<span class="text-accent"> KU</span></span>
                     </div>
@@ -200,137 +398,202 @@
 
                 <!-- Desktop Menu -->
                 <div class="hidden md:flex items-center gap-8">
-                    <a href="#beranda" class="text-silver-light/80 hover:text-accent transition-colors duration-300 font-medium text-sm tracking-wide">Beranda</a>
-                    <a href="#layanan" class="text-silver-light/80 hover:text-accent transition-colors duration-300 font-medium text-sm tracking-wide">Layanan</a>
-                    <a href="#galeri" class="text-silver-light/80 hover:text-accent transition-colors duration-300 font-medium text-sm tracking-wide">Galeri</a>
-                    <a href="#proses" class="text-silver-light/80 hover:text-accent transition-colors duration-300 font-medium text-sm tracking-wide">Proses</a>
-                    <a href="#kontak" class="text-silver-light/80 hover:text-accent transition-colors duration-300 font-medium text-sm tracking-wide">Kontak</a>
+                    <a href="#beranda" class="nav-link active text-sm font-medium tracking-wide">Beranda</a>
+                    <a href="#layanan" class="nav-link text-sm font-medium tracking-wide">Layanan</a>
+                    <a href="#galeri" class="nav-link text-sm font-medium tracking-wide">Galeri</a>
+                    <a href="#testimoni" class="nav-link text-sm font-medium tracking-wide">Testimoni</a>
+                    <a href="#faq" class="nav-link text-sm font-medium tracking-wide">FAQ</a>
+                    <a href="#kontak" class="nav-link text-sm font-medium tracking-wide">Kontak</a>
                     <a href="https://wa.me/628xxxxxxxxx?text=Halo%20Gerobak%20Ku%2C%20saya%20mau%20konsultasi%20tentang%20gerobak" 
-                       class="relative bg-gradient-to-r from-accent to-primary-light text-brown-dark px-6 py-2.5 rounded-full font-bold text-sm hover:scale-105 transition-all duration-300 shadow-lg shadow-accent/25">
-                        <span class="flex items-center gap-2">
-                            <i data-lucide="message-circle" class="w-4 h-4"></i>
-                            Konsultasi Gratis
-                        </span>
+                       class="relative bg-gradient-to-r from-accent to-accent-light text-brown-dark px-6 py-2.5 rounded-full font-bold text-sm hover:scale-105 transition-all duration-300 shadow-lg shadow-accent/25 flex items-center gap-2">
+                        <i data-lucide="message-circle" class="w-4 h-4"></i>
+                        Konsultasi Gratis
                     </a>
                 </div>
 
                 <!-- Mobile Menu Button -->
-                <button id="mobileMenuBtn" class="md:hidden text-white p-2 hover:bg-white/10 rounded-lg transition">
-                    <i data-lucide="menu" class="w-6 h-6"></i>
+                <button id="mobileMenuBtn" class="md:hidden text-white p-2 hover:bg-white/10 rounded-lg transition z-50">
+                    <i data-lucide="menu" class="w-6 h-6" id="menuIcon"></i>
                 </button>
             </div>
         </div>
 
-        <!-- Mobile Menu -->
-        <div id="mobileMenu" class="hidden md:hidden bg-brown-dark/95 backdrop-blur-xl border-t border-white/10">
-            <div class="px-6 py-4 space-y-3">
-                <a href="#beranda" class="block text-silver-light/80 hover:text-accent py-2 font-medium">Beranda</a>
-                <a href="#layanan" class="block text-silver-light/80 hover:text-accent py-2 font-medium">Layanan</a>
-                <a href="#galeri" class="block text-silver-light/80 hover:text-accent py-2 font-medium">Galeri</a>
-                <a href="#proses" class="block text-silver-light/80 hover:text-accent py-2 font-medium">Proses</a>
-                <a href="#kontak" class="block text-silver-light/80 hover:text-accent py-2 font-medium">Kontak</a>
-                <a href="https://wa.me/628xxxxxxxxx" class="block bg-accent text-brown-dark text-center py-3 rounded-full font-bold mt-3">
-                    💬 Konsultasi Gratis
-                </a>
+        <!-- Mobile Menu (slide from right) -->
+        <div id="mobileMenu" class="fixed top-0 right-0 w-80 h-full bg-brown-dark/98 backdrop-blur-2xl border-l border-white/10 z-40 md:hidden">
+            <div class="p-8 pt-20 space-y-1">
+                <a href="#beranda" class="mobile-link block text-silver-light/80 hover:text-accent hover:bg-white/5 py-3 px-4 rounded-xl font-medium transition-all">🏠 Beranda</a>
+                <a href="#layanan" class="mobile-link block text-silver-light/80 hover:text-accent hover:bg-white/5 py-3 px-4 rounded-xl font-medium transition-all">🔧 Layanan</a>
+                <a href="#galeri" class="mobile-link block text-silver-light/80 hover:text-accent hover:bg-white/5 py-3 px-4 rounded-xl font-medium transition-all">🖼️ Galeri</a>
+                <a href="#testimoni" class="mobile-link block text-silver-light/80 hover:text-accent hover:bg-white/5 py-3 px-4 rounded-xl font-medium transition-all">⭐ Testimoni</a>
+                <a href="#faq" class="mobile-link block text-silver-light/80 hover:text-accent hover:bg-white/5 py-3 px-4 rounded-xl font-medium transition-all">❓ FAQ</a>
+                <a href="#kontak" class="mobile-link block text-silver-light/80 hover:text-accent hover:bg-white/5 py-3 px-4 rounded-xl font-medium transition-all">📞 Kontak</a>
+                <div class="pt-4">
+                    <a href="https://wa.me/628xxxxxxxxx" class="block bg-accent text-brown-dark text-center py-3.5 rounded-2xl font-bold">
+                        💬 Konsultasi Gratis
+                    </a>
+                </div>
             </div>
         </div>
+        <!-- Overlay -->
+        <div id="menuOverlay" class="fixed inset-0 bg-black/60 z-30 hidden md:hidden" onclick="toggleMobileMenu()"></div>
     </nav>
 
     <!-- ==================== HERO SECTION ==================== -->
     <section id="beranda" class="relative min-h-screen flex items-center justify-center overflow-hidden">
-        <!-- Background -->
-        <div class="absolute inset-0 bg-gradient-to-br from-brown-dark via-[#2A1F14] to-[#1A120B]"></div>
+        <!-- Animated background -->
+        <div class="absolute inset-0">
+            <div class="absolute inset-0 bg-gradient-to-br from-brown-dark via-brown-mid to-[#0D0A07]"></div>
+            <!-- Animated gradient orbs -->
+            <div class="absolute top-1/4 left-1/4 w-[600px] h-[600px] rounded-full bg-accent/5 blur-[120px] animate-spin-slow" style="animation-duration: 25s;"></div>
+            <div class="absolute bottom-1/4 right-1/4 w-[500px] h-[500px] rounded-full bg-primary/5 blur-[100px] animate-spin-slow" style="animation-duration: 30s; animation-direction: reverse;"></div>
+        </div>
         
-        <!-- Decorative elements -->
-        <div class="absolute inset-0 overflow-hidden">
-            <div class="particle top-[20%] left-[10%] delay-100" style="animation-duration: 8s;"></div>
-            <div class="particle top-[40%] left-[80%] delay-300" style="animation-duration: 6s;"></div>
-            <div class="particle top-[60%] left-[30%] delay-500" style="animation-duration: 7s;"></div>
-            <div class="particle top-[80%] left-[70%] delay-200" style="animation-duration: 9s;"></div>
-            <div class="particle top-[15%] left-[60%] delay-400" style="animation-duration: 5s;"></div>
-            <div class="particle top-[70%] left-[15%] delay-600" style="animation-duration: 8s;"></div>
-            
-            <!-- Large decorative circles -->
-            <div class="absolute -top-40 -right-40 w-96 h-96 rounded-full bg-accent/5 blur-3xl"></div>
-            <div class="absolute -bottom-40 -left-40 w-96 h-96 rounded-full bg-primary/5 blur-3xl"></div>
+        <!-- Particles -->
+        <div class="absolute inset-0 overflow-hidden pointer-events-none">
+            <div class="particle top-[15%] left-[8%]" style="animation-duration: 7s; width: 4px; height: 4px;"></div>
+            <div class="particle top-[25%] left-[85%] delay-200" style="animation-duration: 9s; width: 3px; height: 3px;"></div>
+            <div class="particle top-[55%] left-[20%] delay-400" style="animation-duration: 6s; width: 5px; height: 5px;"></div>
+            <div class="particle top-[75%] left-[75%] delay-100" style="animation-duration: 8s; width: 3px; height: 3px;"></div>
+            <div class="particle top-[10%] left-[55%] delay-300" style="animation-duration: 10s; width: 4px; height: 4px;"></div>
+            <div class="particle top-[65%] left-[12%] delay-500" style="animation-duration: 7s; width: 2px; height: 2px;"></div>
+            <div class="particle top-[40%] left-[90%] delay-600" style="animation-duration: 11s; width: 4px; height: 4px;"></div>
+            <div class="particle top-[85%] left-[45%] delay-700" style="animation-duration: 8s; width: 3px; height: 3px;"></div>
             
             <!-- Grid pattern -->
-            <div class="absolute inset-0 opacity-[0.03]" style="background-image: url('data:image/svg+xml,%3Csvg width=&quot;60&quot; height=&quot;60&quot; xmlns=&quot;http://www.w3.org/2000/svg&quot;%3E%3Cpath d=&quot;M0 0h60v60H0z&quot; fill=&quot;none&quot; stroke=&quot;%23fff&quot; stroke-width=&quot;0.5&quot;/%3E%3C/svg%3E'); background-size: 60px 60px;"></div>
+            <div class="absolute inset-0 opacity-[0.02]" style="background-image: url('data:image/svg+xml,%3Csvg width=&quot;60&quot; height=&quot;60&quot; xmlns=&quot;http://www.w3.org/2000/svg&quot;%3E%3Cpath d=&quot;M0 0h60v60H0z&quot; fill=&quot;none&quot; stroke=&quot;%23fff&quot; stroke-width=&quot;0.5&quot;/%3E%3C/svg%3E'); background-size: 60px 60px;"></div>
         </div>
 
         <div class="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 text-center">
             <!-- Badge -->
-            <div class="animate-fade-up inline-flex items-center gap-2 bg-accent/10 border border-accent/20 rounded-full px-5 py-2 mb-8">
-                <span class="w-2 h-2 rounded-full bg-accent animate-pulse"></span>
-                <span class="text-accent text-sm font-medium tracking-wide">Terpercaya Sejak 2015</span>
+            <div class="animate-fade-down inline-flex items-center gap-2.5 glass rounded-full px-6 py-2.5 mb-8">
+                <span class="relative flex h-2.5 w-2.5">
+                    <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent opacity-75"></span>
+                    <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-accent"></span>
+                </span>
+                <span class="text-accent text-sm font-semibold tracking-wider">Terpercaya Sejak 2015</span>
             </div>
 
             <!-- Main heading -->
-            <h1 class="animate-fade-up delay-200 font-heading text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-extrabold text-white leading-tight mb-6">
-                Gerobak <span class="text-transparent bg-clip-text bg-gradient-to-r from-accent via-yellow-300 to-accent">Berkah</span>
-                <br>
-                <span class="text-3xl sm:text-4xl md:text-5xl text-silver/80 font-light">Untuk Kita Semua</span>
+            <h1 class="animate-fade-up delay-200 font-heading text-5xl sm:text-6xl md:text-7xl lg:text-[5.5rem] font-black text-white leading-[1.1] mb-6">
+                Gerobak
+                <span class="block text-transparent bg-clip-text bg-gradient-to-r from-accent via-yellow-300 to-accent-light" style="background-size: 200% auto; animation: shimmer 4s linear infinite;">
+                    Berkah
+                </span>
+                <span class="block text-3xl sm:text-4xl md:text-5xl text-silver/60 font-light mt-2 font-body">
+                    Untuk Kita Semua
+                </span>
             </h1>
 
             <!-- Subtitle -->
-            <p class="animate-fade-up delay-300 text-silver/70 text-lg sm:text-xl max-w-2xl mx-auto mb-10 leading-relaxed">
-                Spesialis pembuatan gerobak <strong class="text-white">Food & Beverage</strong>, 
-                <strong class="text-white">Kiosk Counter Mall</strong>, dan 
-                <strong class="text-white">Custom Design</strong> berkualitas tinggi.
+            <p class="animate-fade-up delay-300 text-silver/60 text-lg sm:text-xl max-w-2xl mx-auto mb-12 leading-relaxed">
+                Spesialis pembuatan gerobak <strong class="text-white font-semibold">Food & Beverage</strong>, 
+                <strong class="text-white font-semibold">Kiosk Counter Mall</strong>, dan 
+                <strong class="text-white font-semibold">Custom Design</strong> berkualitas tinggi.
             </p>
 
             <!-- CTA Buttons -->
             <div class="animate-fade-up delay-400 flex flex-col sm:flex-row gap-4 justify-center items-center">
                 <a href="https://wa.me/628xxxxxxxxx?text=Halo%20Gerobak%20Ku%2C%20saya%20tertarik%20dengan%20jasa%20pembuatan%20gerobak" 
-                   class="group relative bg-gradient-to-r from-accent to-primary-light text-brown-dark px-10 py-4 rounded-full font-bold text-lg hover:scale-105 transition-all duration-300 shadow-xl shadow-accent/30 flex items-center gap-3">
-                    <i data-lucide="message-circle" class="w-5 h-5"></i>
-                    Pesan Sekarang
+                   class="group relative bg-gradient-to-r from-accent to-accent-light text-brown-dark px-10 py-4 rounded-full font-bold text-lg hover:scale-105 transition-all duration-300 shadow-xl shadow-accent/30 flex items-center gap-3 overflow-hidden">
+                    <i data-lucide="message-circle" class="w-5 h-5 relative z-10"></i>
+                    <span class="relative z-10">Pesan Sekarang</span>
                     <span class="absolute inset-0 rounded-full animate-shimmer"></span>
                 </a>
-                <a href="#galeri" class="group border-2 border-silver/30 text-silver-light px-10 py-4 rounded-full font-semibold text-lg hover:border-accent hover:text-accent transition-all duration-300 flex items-center gap-3">
-                    <i data-lucide="images" class="w-5 h-5"></i>
+                <a href="#galeri" class="group glass border border-white/20 text-silver-light px-10 py-4 rounded-full font-semibold text-lg hover:border-accent hover:text-accent transition-all duration-300 flex items-center gap-3">
+                    <i data-lucide="play-circle" class="w-5 h-5 group-hover:scale-110 transition-transform"></i>
                     Lihat Portofolio
                 </a>
             </div>
 
             <!-- Stats -->
-            <div class="animate-fade-up delay-600 mt-16 grid grid-cols-3 gap-8 max-w-lg mx-auto">
-                <div class="text-center">
-                    <div class="text-3xl sm:text-4xl font-heading font-bold text-accent" id="counter1">500+</div>
-                    <div class="text-silver/60 text-sm mt-1">Gerobak Terjual</div>
+            <div class="animate-fade-up delay-600 mt-20 grid grid-cols-3 gap-6 max-w-xl mx-auto">
+                <div class="glass rounded-2xl py-5 px-4 text-center hover:bg-white/10 transition-colors duration-300">
+                    <div class="text-3xl sm:text-4xl font-heading font-black text-accent" id="counter1">0</div>
+                    <div class="text-silver/50 text-xs sm:text-sm mt-1 font-medium">Gerobak Terjual</div>
                 </div>
-                <div class="text-center border-x border-white/10">
-                    <div class="text-3xl sm:text-4xl font-heading font-bold text-accent" id="counter2">50+</div>
-                    <div class="text-silver/60 text-sm mt-1">Klien Puas</div>
+                <div class="glass rounded-2xl py-5 px-4 text-center hover:bg-white/10 transition-colors duration-300">
+                    <div class="text-3xl sm:text-4xl font-heading font-black text-accent" id="counter2">0</div>
+                    <div class="text-silver/50 text-xs sm:text-sm mt-1 font-medium">Klien Puas</div>
                 </div>
-                <div class="text-center">
-                    <div class="text-3xl sm:text-4xl font-heading font-bold text-accent" id="counter3">10+</div>
-                    <div class="text-silver/60 text-sm mt-1">Tahun Pengalaman</div>
+                <div class="glass rounded-2xl py-5 px-4 text-center hover:bg-white/10 transition-colors duration-300">
+                    <div class="text-3xl sm:text-4xl font-heading font-black text-accent" id="counter3">0</div>
+                    <div class="text-silver/50 text-xs sm:text-sm mt-1 font-medium">Tahun Pengalaman</div>
                 </div>
             </div>
         </div>
 
         <!-- Scroll indicator -->
-        <div class="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce">
-            <a href="#layanan" class="text-silver/40 hover:text-accent transition-colors">
-                <i data-lucide="chevrons-down" class="w-8 h-8"></i>
-            </a>
+        <div class="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 animate-fade-up delay-800">
+            <span class="text-silver/30 text-xs tracking-widest uppercase">Scroll</span>
+            <div class="w-6 h-10 rounded-full border-2 border-silver/20 flex items-start justify-center p-1.5">
+                <div class="w-1.5 h-3 rounded-full bg-accent animate-bounce"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== TRUSTED BY / MARQUEE ==================== -->
+    <section class="py-8 bg-brown-mid/50 border-y border-white/5 overflow-hidden">
+        <div class="flex items-center">
+            <div class="marquee-track">
+                <span class="text-silver/20 text-sm font-medium tracking-widest uppercase whitespace-nowrap flex items-center gap-3">
+                    <span class="w-2 h-2 rounded-full bg-accent/30"></span>Food Court
+                </span>
+                <span class="text-silver/20 text-sm font-medium tracking-widest uppercase whitespace-nowrap flex items-center gap-3">
+                    <span class="w-2 h-2 rounded-full bg-accent/30"></span>Mall Premium
+                </span>
+                <span class="text-silver/20 text-sm font-medium tracking-widest uppercase whitespace-nowrap flex items-center gap-3">
+                    <span class="w-2 h-2 rounded-full bg-accent/30"></span>Street Food
+                </span>
+                <span class="text-silver/20 text-sm font-medium tracking-widest uppercase whitespace-nowrap flex items-center gap-3">
+                    <span class="w-2 h-2 rounded-full bg-accent/30"></span>Franchise
+                </span>
+                <span class="text-silver/20 text-sm font-medium tracking-widest uppercase whitespace-nowrap flex items-center gap-3">
+                    <span class="w-2 h-2 rounded-full bg-accent/30"></span>Booth Event
+                </span>
+                <span class="text-silver/20 text-sm font-medium tracking-widest uppercase whitespace-nowrap flex items-center gap-3">
+                    <span class="w-2 h-2 rounded-full bg-accent/30"></span>Kiosk Counter
+                </span>
+                <span class="text-silver/20 text-sm font-medium tracking-widest uppercase whitespace-nowrap flex items-center gap-3">
+                    <span class="w-2 h-2 rounded-full bg-accent/30"></span>Custom Design
+                </span>
+                <!-- Duplicate for seamless loop -->
+                <span class="text-silver/20 text-sm font-medium tracking-widest uppercase whitespace-nowrap flex items-center gap-3">
+                    <span class="w-2 h-2 rounded-full bg-accent/30"></span>Food Court
+                </span>
+                <span class="text-silver/20 text-sm font-medium tracking-widest uppercase whitespace-nowrap flex items-center gap-3">
+                    <span class="w-2 h-2 rounded-full bg-accent/30"></span>Mall Premium
+                </span>
+                <span class="text-silver/20 text-sm font-medium tracking-widest uppercase whitespace-nowrap flex items-center gap-3">
+                    <span class="w-2 h-2 rounded-full bg-accent/30"></span>Street Food
+                </span>
+                <span class="text-silver/20 text-sm font-medium tracking-widest uppercase whitespace-nowrap flex items-center gap-3">
+                    <span class="w-2 h-2 rounded-full bg-accent/30"></span>Franchise
+                </span>
+                <span class="text-silver/20 text-sm font-medium tracking-widest uppercase whitespace-nowrap flex items-center gap-3">
+                    <span class="w-2 h-2 rounded-full bg-accent/30"></span>Booth Event
+                </span>
+                <span class="text-silver/20 text-sm font-medium tracking-widest uppercase whitespace-nowrap flex items-center gap-3">
+                    <span class="w-2 h-2 rounded-full bg-accent/30"></span>Kiosk Counter
+                </span>
+                <span class="text-silver/20 text-sm font-medium tracking-widest uppercase whitespace-nowrap flex items-center gap-3">
+                    <span class="w-2 h-2 rounded-full bg-accent/30"></span>Custom Design
+                </span>
+            </div>
         </div>
     </section>
 
     <!-- ==================== LAYANAN SECTION ==================== -->
-    <section id="layanan" class="py-24 bg-gradient-to-b from-brown-dark to-[#1E150D] relative">
-        <!-- Section decoration -->
-        <div class="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-accent/30 to-transparent"></div>
+    <section id="layanan" class="py-28 relative">
+        <div class="section-divider absolute top-0 left-0 right-0"></div>
 
         <div class="max-w-7xl mx-auto px-4 sm:px-6">
             <!-- Section header -->
-            <div class="text-center mb-16 reveal">
-                <span class="inline-block text-accent text-sm font-semibold tracking-[0.2em] uppercase mb-4">Layanan Kami</span>
-                <h2 class="font-heading text-4xl sm:text-5xl font-bold text-white mb-4">
+            <div class="text-center mb-20 reveal">
+                <span class="inline-block text-accent text-xs font-bold tracking-[0.3em] uppercase mb-4 glass rounded-full px-5 py-2">Layanan Kami</span>
+                <h2 class="font-heading text-4xl sm:text-5xl lg:text-6xl font-black text-white mb-5">
                     Solusi Gerobak <span class="text-accent">Profesional</span>
                 </h2>
-                <p class="text-silver/60 max-w-2xl mx-auto text-lg">
+                <p class="text-silver/50 max-w-2xl mx-auto text-lg leading-relaxed">
                     Kami menyediakan berbagai jenis gerobak dan kiosk dengan kualitas terbaik, desain modern, dan harga kompetitif.
                 </p>
             </div>
@@ -339,145 +602,161 @@
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                 <!-- Card 1: Gerobak F&B -->
                 <div class="reveal card-glow group relative bg-gradient-to-b from-white/[0.07] to-transparent rounded-3xl overflow-hidden border border-white/[0.08]">
-                    <!-- Image -->
-                    <div class="relative h-64 overflow-hidden">
+                    <div class="relative h-72 overflow-hidden">
                         <img src="https://images.unsplash.com/photo-1565123409695-7b5ef63a2efb?w=600&h=400&fit=crop" 
                              alt="Gerobak Food & Beverage" 
                              class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
                              loading="lazy">
-                        <div class="absolute inset-0 bg-gradient-to-t from-brown-dark via-transparent to-transparent"></div>
-                        <div class="absolute top-4 left-4 bg-accent/90 backdrop-blur-sm text-brown-dark px-4 py-1.5 rounded-full text-xs font-bold tracking-wide">
-                            POPULER
+                        <div class="absolute inset-0 bg-gradient-to-t from-brown-dark via-brown-dark/30 to-transparent"></div>
+                        <div class="absolute top-5 left-5 bg-accent text-brown-dark px-4 py-1.5 rounded-full text-xs font-black tracking-wider shadow-lg shadow-accent/30">
+                            🔥 POPULER
                         </div>
                     </div>
-                    <!-- Content -->
-                    <div class="p-8">
-                        <div class="w-14 h-14 rounded-2xl bg-accent/10 flex items-center justify-center mb-5 group-hover:bg-accent/20 transition-colors">
+                    <div class="p-8 relative">
+                        <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-accent/20 to-accent/5 flex items-center justify-center mb-5 group-hover:scale-110 transition-transform duration-300 border border-accent/10">
                             <i data-lucide="utensils" class="w-7 h-7 text-accent"></i>
                         </div>
                         <h3 class="font-heading text-2xl font-bold text-white mb-3">Gerobak F&B</h3>
-                        <p class="text-silver/60 leading-relaxed mb-6">
-                            Gerobak khusus makanan & minuman untuk food court, street food, dan booth festival. Tersedia berbagai ukuran dan style.
+                        <p class="text-silver/50 leading-relaxed mb-6 text-sm">
+                            Gerobak khusus makanan & minuman untuk food court, street food, dan booth festival.
                         </p>
-                        <ul class="space-y-2 mb-6">
-                            <li class="flex items-center gap-2 text-silver/70 text-sm">
-                                <i data-lucide="check-circle-2" class="w-4 h-4 text-accent flex-shrink-0"></i>
+                        <ul class="space-y-3 mb-8">
+                            <li class="flex items-center gap-3 text-silver/60 text-sm">
+                                <div class="w-5 h-5 rounded-full bg-accent/10 flex items-center justify-center flex-shrink-0">
+                                    <i data-lucide="check" class="w-3 h-3 text-accent"></i>
+                                </div>
                                 Food cart & food truck mini
                             </li>
-                            <li class="flex items-center gap-2 text-silver/70 text-sm">
-                                <i data-lucide="check-circle-2" class="w-4 h-4 text-accent flex-shrink-0"></i>
+                            <li class="flex items-center gap-3 text-silver/60 text-sm">
+                                <div class="w-5 h-5 rounded-full bg-accent/10 flex items-center justify-center flex-shrink-0">
+                                    <i data-lucide="check" class="w-3 h-3 text-accent"></i>
+                                </div>
                                 Booth festival & event
                             </li>
-                            <li class="flex items-center gap-2 text-silver/70 text-sm">
-                                <i data-lucide="check-circle-2" class="w-4 h-4 text-accent flex-shrink-0"></i>
+                            <li class="flex items-center gap-3 text-silver/60 text-sm">
+                                <div class="w-5 h-5 rounded-full bg-accent/10 flex items-center justify-center flex-shrink-0">
+                                    <i data-lucide="check" class="w-3 h-3 text-accent"></i>
+                                </div>
                                 Gerobak kopi & boba
                             </li>
                         </ul>
-                        <div class="flex items-center justify-between">
+                        <div class="flex items-center justify-between pt-6 border-t border-white/5">
                             <div>
-                                <span class="text-silver/50 text-sm">Mulai dari</span>
-                                <p class="text-accent font-bold text-xl">Rp 5 Juta</p>
+                                <span class="text-silver/40 text-xs">Mulai dari</span>
+                                <p class="text-accent font-black text-2xl">Rp 5 Jt</p>
                             </div>
                             <a href="https://wa.me/628xxxxxxxxx?text=Halo%2C%20saya%20tertarik%20dengan%20Gerobak%20F%26B" 
-                               class="bg-accent/10 hover:bg-accent text-accent hover:text-brown-dark px-5 py-2.5 rounded-full font-semibold text-sm transition-all duration-300 flex items-center gap-2">
+                               class="bg-accent/10 hover:bg-accent text-accent hover:text-brown-dark px-6 py-3 rounded-full font-bold text-sm transition-all duration-300 flex items-center gap-2 hover:shadow-lg hover:shadow-accent/20">
                                 <i data-lucide="message-circle" class="w-4 h-4"></i>
-                                Tanya
+                                Tanya Harga
                             </a>
                         </div>
                     </div>
                 </div>
 
                 <!-- Card 2: Kiosk Counter Mall -->
-                <div class="reveal card-glow group relative bg-gradient-to-b from-white/[0.07] to-transparent rounded-3xl overflow-hidden border border-white/[0.08]">
-                    <div class="relative h-64 overflow-hidden">
+                <div class="reveal card-glow group relative bg-gradient-to-b from-white/[0.07] to-transparent rounded-3xl overflow-hidden border border-white/[0.08]" style="animation-delay: 0.15s;">
+                    <div class="relative h-72 overflow-hidden">
                         <img src="https://images.unsplash.com/photo-1519567241046-7f570eee3ce6?w=600&h=400&fit=crop" 
                              alt="Kiosk Counter Mall" 
                              class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
                              loading="lazy">
-                        <div class="absolute inset-0 bg-gradient-to-t from-brown-dark via-transparent to-transparent"></div>
-                        <div class="absolute top-4 left-4 bg-silver/90 backdrop-blur-sm text-brown-dark px-4 py-1.5 rounded-full text-xs font-bold tracking-wide">
-                            PREMIUM
+                        <div class="absolute inset-0 bg-gradient-to-t from-brown-dark via-brown-dark/30 to-transparent"></div>
+                        <div class="absolute top-5 left-5 bg-white/90 backdrop-blur-sm text-brown-dark px-4 py-1.5 rounded-full text-xs font-black tracking-wider shadow-lg">
+                            👑 PREMIUM
                         </div>
                     </div>
-                    <div class="p-8">
-                        <div class="w-14 h-14 rounded-2xl bg-accent/10 flex items-center justify-center mb-5 group-hover:bg-accent/20 transition-colors">
+                    <div class="p-8 relative">
+                        <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-accent/20 to-accent/5 flex items-center justify-center mb-5 group-hover:scale-110 transition-transform duration-300 border border-accent/10">
                             <i data-lucide="store" class="w-7 h-7 text-accent"></i>
                         </div>
                         <h3 class="font-heading text-2xl font-bold text-white mb-3">Kiosk Counter Mall</h3>
-                        <p class="text-silver/60 leading-relaxed mb-6">
-                            Kiosk dan counter premium untuk mall, plaza, dan pusat perbelanjaan. Desain elegan sesuai standar mall.
+                        <p class="text-silver/50 leading-relaxed mb-6 text-sm">
+                            Kiosk dan counter premium untuk mall, plaza, dan pusat perbelanjaan standar internasional.
                         </p>
-                        <ul class="space-y-2 mb-6">
-                            <li class="flex items-center gap-2 text-silver/70 text-sm">
-                                <i data-lucide="check-circle-2" class="w-4 h-4 text-accent flex-shrink-0"></i>
+                        <ul class="space-y-3 mb-8">
+                            <li class="flex items-center gap-3 text-silver/60 text-sm">
+                                <div class="w-5 h-5 rounded-full bg-accent/10 flex items-center justify-center flex-shrink-0">
+                                    <i data-lucide="check" class="w-3 h-3 text-accent"></i>
+                                </div>
                                 Counter kosmetik & fashion
                             </li>
-                            <li class="flex items-center gap-2 text-silver/70 text-sm">
-                                <i data-lucide="check-circle-2" class="w-4 h-4 text-accent flex-shrink-0"></i>
+                            <li class="flex items-center gap-3 text-silver/60 text-sm">
+                                <div class="w-5 h-5 rounded-full bg-accent/10 flex items-center justify-center flex-shrink-0">
+                                    <i data-lucide="check" class="w-3 h-3 text-accent"></i>
+                                </div>
                                 Kiosk F&B mall standard
                             </li>
-                            <li class="flex items-center gap-2 text-silver/70 text-sm">
-                                <i data-lucide="check-circle-2" class="w-4 h-4 text-accent flex-shrink-0"></i>
+                            <li class="flex items-center gap-3 text-silver/60 text-sm">
+                                <div class="w-5 h-5 rounded-full bg-accent/10 flex items-center justify-center flex-shrink-0">
+                                    <i data-lucide="check" class="w-3 h-3 text-accent"></i>
+                                </div>
                                 Display & showcase unit
                             </li>
                         </ul>
-                        <div class="flex items-center justify-between">
+                        <div class="flex items-center justify-between pt-6 border-t border-white/5">
                             <div>
-                                <span class="text-silver/50 text-sm">Mulai dari</span>
-                                <p class="text-accent font-bold text-xl">Rp 15 Juta</p>
+                                <span class="text-silver/40 text-xs">Mulai dari</span>
+                                <p class="text-accent font-black text-2xl">Rp 15 Jt</p>
                             </div>
                             <a href="https://wa.me/628xxxxxxxxx?text=Halo%2C%20saya%20tertarik%20dengan%20Kiosk%20Counter%20Mall" 
-                               class="bg-accent/10 hover:bg-accent text-accent hover:text-brown-dark px-5 py-2.5 rounded-full font-semibold text-sm transition-all duration-300 flex items-center gap-2">
+                               class="bg-accent/10 hover:bg-accent text-accent hover:text-brown-dark px-6 py-3 rounded-full font-bold text-sm transition-all duration-300 flex items-center gap-2 hover:shadow-lg hover:shadow-accent/20">
                                 <i data-lucide="message-circle" class="w-4 h-4"></i>
-                                Tanya
+                                Tanya Harga
                             </a>
                         </div>
                     </div>
                 </div>
 
                 <!-- Card 3: Custom Design -->
-                <div class="reveal card-glow group relative bg-gradient-to-b from-white/[0.07] to-transparent rounded-3xl overflow-hidden border border-white/[0.08]">
-                    <div class="relative h-64 overflow-hidden">
+                <div class="reveal card-glow group relative bg-gradient-to-b from-white/[0.07] to-transparent rounded-3xl overflow-hidden border border-white/[0.08]" style="animation-delay: 0.3s;">
+                    <div class="relative h-72 overflow-hidden">
                         <img src="https://images.unsplash.com/photo-1558618666-fcd25c85f82e?w=600&h=400&fit=crop" 
                              alt="Custom Design Gerobak" 
                              class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
                              loading="lazy">
-                        <div class="absolute inset-0 bg-gradient-to-t from-brown-dark via-transparent to-transparent"></div>
-                        <div class="absolute top-4 left-4 bg-primary-light/90 backdrop-blur-sm text-brown-dark px-4 py-1.5 rounded-full text-xs font-bold tracking-wide">
-                            CUSTOM
+                        <div class="absolute inset-0 bg-gradient-to-t from-brown-dark via-brown-dark/30 to-transparent"></div>
+                        <div class="absolute top-5 left-5 bg-primary-light/90 backdrop-blur-sm text-brown-dark px-4 py-1.5 rounded-full text-xs font-black tracking-wider shadow-lg">
+                            ✨ CUSTOM
                         </div>
                     </div>
-                    <div class="p-8">
-                        <div class="w-14 h-14 rounded-2xl bg-accent/10 flex items-center justify-center mb-5 group-hover:bg-accent/20 transition-colors">
+                    <div class="p-8 relative">
+                        <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-accent/20 to-accent/5 flex items-center justify-center mb-5 group-hover:scale-110 transition-transform duration-300 border border-accent/10">
                             <i data-lucide="pencil-ruler" class="w-7 h-7 text-accent"></i>
                         </div>
                         <h3 class="font-heading text-2xl font-bold text-white mb-3">Custom Design</h3>
-                        <p class="text-silver/60 leading-relaxed mb-6">
-                            Buat gerobak dengan desain sesuai keinginan Anda. Konsultasi gratis, revisi sampai puas, dan garansi kualitas.
+                        <p class="text-silver/50 leading-relaxed mb-6 text-sm">
+                            Buat gerobak dengan desain sesuai keinginan Anda. Konsultasi gratis, revisi sampai puas.
                         </p>
-                        <ul class="space-y-2 mb-6">
-                            <li class="flex items-center gap-2 text-silver/70 text-sm">
-                                <i data-lucide="check-circle-2" class="w-4 h-4 text-accent flex-shrink-0"></i>
+                        <ul class="space-y-3 mb-8">
+                            <li class="flex items-center gap-3 text-silver/60 text-sm">
+                                <div class="w-5 h-5 rounded-full bg-accent/10 flex items-center justify-center flex-shrink-0">
+                                    <i data-lucide="check" class="w-3 h-3 text-accent"></i>
+                                </div>
                                 Desain 3D sebelum produksi
                             </li>
-                            <li class="flex items-center gap-2 text-silver/70 text-sm">
-                                <i data-lucide="check-circle-2" class="w-4 h-4 text-accent flex-shrink-0"></i>
+                            <li class="flex items-center gap-3 text-silver/60 text-sm">
+                                <div class="w-5 h-5 rounded-full bg-accent/10 flex items-center justify-center flex-shrink-0">
+                                    <i data-lucide="check" class="w-3 h-3 text-accent"></i>
+                                </div>
                                 Branding & wrapping
                             </li>
-                            <li class="flex items-center gap-2 text-silver/70 text-sm">
-                                <i data-lucide="check-circle-2" class="w-4 h-4 text-accent flex-shrink-0"></i>
+                            <li class="flex items-center gap-3 text-silver/60 text-sm">
+                                <div class="w-5 h-5 rounded-full bg-accent/10 flex items-center justify-center flex-shrink-0">
+                                    <i data-lucide="check" class="w-3 h-3 text-accent"></i>
+                                </div>
                                 Revisi unlimited
                             </li>
                         </ul>
-                        <div class="flex items-center justify-between">
+                        <div class="flex items-center justify-between pt-6 border-t border-white/5">
                             <div>
-                                <span class="text-silver/50 text-sm">Mulai dari</span>
-                                <p class="text-accent font-bold text-xl">Rp 8 Juta</p>
+                                <span class="text-silver/40 text-xs">Mulai dari</span>
+                                <p class="text-accent font-black text-2xl">Rp 8 Jt</p>
                             </div>
                             <a href="https://wa.me/628xxxxxxxxx?text=Halo%2C%20saya%20mau%20buat%20gerobak%20custom" 
-                               class="bg-accent/10 hover:bg-accent text-accent hover:text-brown-dark px-5 py-2.5 rounded-full font-semibold text-sm transition-all duration-300 flex items-center gap-2">
+                               class="bg-accent/10 hover:bg-accent text-accent hover:text-brown-dark px-6 py-3 rounded-full font-bold text-sm transition-all duration-300 flex items-center gap-2 hover:shadow-lg hover:shadow-accent/20">
                                 <i data-lucide="message-circle" class="w-4 h-4"></i>
-                                Tanya
+                                Tanya Harga
                             </a>
                         </div>
                     </div>
@@ -487,84 +766,146 @@
     </section>
 
     <!-- ==================== GALERI SECTION ==================== -->
-    <section id="galeri" class="py-24 bg-[#1E150D] relative">
-        <div class="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-accent/30 to-transparent"></div>
+    <section id="galeri" class="py-28 relative">
+        <div class="section-divider absolute top-0 left-0 right-0"></div>
 
         <div class="max-w-7xl mx-auto px-4 sm:px-6">
             <div class="text-center mb-16 reveal">
-                <span class="inline-block text-accent text-sm font-semibold tracking-[0.2em] uppercase mb-4">Portofolio</span>
-                <h2 class="font-heading text-4xl sm:text-5xl font-bold text-white mb-4">
+                <span class="inline-block text-accent text-xs font-bold tracking-[0.3em] uppercase mb-4 glass rounded-full px-5 py-2">Portofolio</span>
+                <h2 class="font-heading text-4xl sm:text-5xl lg:text-6xl font-black text-white mb-5">
                     Hasil Karya <span class="text-accent">Kami</span>
                 </h2>
-                <p class="text-silver/60 max-w-2xl mx-auto text-lg">
+                <p class="text-silver/50 max-w-2xl mx-auto text-lg">
                     Beberapa contoh gerobak dan kiosk yang telah kami buat untuk klien di seluruh Indonesia.
                 </p>
             </div>
 
+            <!-- Filter Tabs -->
+            <div class="flex flex-wrap justify-center gap-3 mb-12 reveal">
+                <button class="filter-btn active px-6 py-2.5 rounded-full text-sm font-semibold transition-all duration-300" onclick="filterGallery('all')">Semua</button>
+                <button class="filter-btn px-6 py-2.5 rounded-full text-sm font-semibold transition-all duration-300" onclick="filterGallery('fnb')">Food & Beverage</button>
+                <button class="filter-btn px-6 py-2.5 rounded-full text-sm font-semibold transition-all duration-300" onclick="filterGallery('mall')">Kiosk Mall</button>
+                <button class="filter-btn px-6 py-2.5 rounded-full text-sm font-semibold transition-all duration-300" onclick="filterGallery('custom')">Custom</button>
+            </div>
+
             <!-- Gallery Grid -->
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                <div class="reveal card-glow group relative rounded-2xl overflow-hidden aspect-[4/3]">
-                    <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=600&h=450&fit=crop" 
-                         alt="Gerobak makanan modern" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" loading="lazy">
-                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                        <div class="absolute bottom-0 left-0 right-0 p-6">
-                            <h4 class="text-white font-bold text-lg">Gerobak Makanan Modern</h4>
-                            <p class="text-silver/80 text-sm">Food Court Jakarta Selatan</p>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6" id="galleryGrid">
+                <div class="reveal-scale gallery-item" data-category="fnb" onclick="openLightbox(this)">
+                    <div class="card-glow group relative rounded-2xl overflow-hidden aspect-[4/3] cursor-pointer">
+                        <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=600&h=450&fit=crop" 
+                             alt="Gerobak makanan modern" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" loading="lazy"
+                             data-caption="Gerobak Makanan Modern" data-sub="Food Court Jakarta Selatan">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-400">
+                            <div class="absolute bottom-0 left-0 right-0 p-6">
+                                <div class="flex items-center gap-2 mb-2">
+                                    <span class="bg-accent/20 text-accent text-xs px-2 py-0.5 rounded-full font-semibold">F&B</span>
+                                </div>
+                                <h4 class="text-white font-bold text-lg">Gerobak Makanan Modern</h4>
+                                <p class="text-white/60 text-sm">Food Court Jakarta Selatan</p>
+                            </div>
+                            <div class="absolute top-4 right-4 w-10 h-10 rounded-full bg-white/10 backdrop-blur-sm flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 group-hover:scale-110">
+                                <i data-lucide="expand" class="w-5 h-5 text-white"></i>
+                            </div>
                         </div>
                     </div>
                 </div>
 
-                <div class="reveal card-glow group relative rounded-2xl overflow-hidden aspect-[4/3]">
-                    <img src="https://images.unsplash.com/photo-1567521464027-f127ff144326?w=600&h=450&fit=crop" 
-                         alt="Kiosk kopi premium" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" loading="lazy">
-                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                        <div class="absolute bottom-0 left-0 right-0 p-6">
-                            <h4 class="text-white font-bold text-lg">Kiosk Kopi Premium</h4>
-                            <p class="text-silver/80 text-sm">Mall Central Park Jakarta</p>
+                <div class="reveal-scale gallery-item" data-category="mall" onclick="openLightbox(this)" style="animation-delay: 0.1s;">
+                    <div class="card-glow group relative rounded-2xl overflow-hidden aspect-[4/3] cursor-pointer">
+                        <img src="https://images.unsplash.com/photo-1567521464027-f127ff144326?w=600&h=450&fit=crop" 
+                             alt="Kiosk kopi premium" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" loading="lazy"
+                             data-caption="Kiosk Kopi Premium" data-sub="Mall Central Park Jakarta">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-400">
+                            <div class="absolute bottom-0 left-0 right-0 p-6">
+                                <div class="flex items-center gap-2 mb-2">
+                                    <span class="bg-white/20 text-white text-xs px-2 py-0.5 rounded-full font-semibold">Mall</span>
+                                </div>
+                                <h4 class="text-white font-bold text-lg">Kiosk Kopi Premium</h4>
+                                <p class="text-white/60 text-sm">Mall Central Park Jakarta</p>
+                            </div>
+                            <div class="absolute top-4 right-4 w-10 h-10 rounded-full bg-white/10 backdrop-blur-sm flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 group-hover:scale-110">
+                                <i data-lucide="expand" class="w-5 h-5 text-white"></i>
+                            </div>
                         </div>
                     </div>
                 </div>
 
-                <div class="reveal card-glow group relative rounded-2xl overflow-hidden aspect-[4/3]">
-                    <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=600&h=450&fit=crop" 
-                         alt="Counter restoran elegan" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" loading="lazy">
-                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                        <div class="absolute bottom-0 left-0 right-0 p-6">
-                            <h4 class="text-white font-bold text-lg">Counter Restoran Elegan</h4>
-                            <p class="text-silver/80 text-sm">Mall Tunjungan Surabaya</p>
+                <div class="reveal-scale gallery-item" data-category="custom" onclick="openLightbox(this)" style="animation-delay: 0.2s;">
+                    <div class="card-glow group relative rounded-2xl overflow-hidden aspect-[4/3] cursor-pointer">
+                        <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=600&h=450&fit=crop" 
+                             alt="Counter restoran elegan" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" loading="lazy"
+                             data-caption="Counter Restoran Elegan" data-sub="Mall Tunjungan Surabaya">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-400">
+                            <div class="absolute bottom-0 left-0 right-0 p-6">
+                                <div class="flex items-center gap-2 mb-2">
+                                    <span class="bg-primary-light/20 text-primary-light text-xs px-2 py-0.5 rounded-full font-semibold">Custom</span>
+                                </div>
+                                <h4 class="text-white font-bold text-lg">Counter Restoran Elegan</h4>
+                                <p class="text-white/60 text-sm">Mall Tunjungan Surabaya</p>
+                            </div>
+                            <div class="absolute top-4 right-4 w-10 h-10 rounded-full bg-white/10 backdrop-blur-sm flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 group-hover:scale-110">
+                                <i data-lucide="expand" class="w-5 h-5 text-white"></i>
+                            </div>
                         </div>
                     </div>
                 </div>
 
-                <div class="reveal card-glow group relative rounded-2xl overflow-hidden aspect-[4/3]">
-                    <img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=600&h=450&fit=crop" 
-                         alt="Gerobak street food" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" loading="lazy">
-                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                        <div class="absolute bottom-0 left-0 right-0 p-6">
-                            <h4 class="text-white font-bold text-lg">Gerobak Street Food</h4>
-                            <p class="text-silver/80 text-sm">Pasar Modern BSD</p>
+                <div class="reveal-scale gallery-item" data-category="fnb" onclick="openLightbox(this)" style="animation-delay: 0.3s;">
+                    <div class="card-glow group relative rounded-2xl overflow-hidden aspect-[4/3] cursor-pointer">
+                        <img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=600&h=450&fit=crop" 
+                             alt="Gerobak street food" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" loading="lazy"
+                             data-caption="Gerobak Street Food" data-sub="Pasar Modern BSD">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-400">
+                            <div class="absolute bottom-0 left-0 right-0 p-6">
+                                <div class="flex items-center gap-2 mb-2">
+                                    <span class="bg-accent/20 text-accent text-xs px-2 py-0.5 rounded-full font-semibold">F&B</span>
+                                </div>
+                                <h4 class="text-white font-bold text-lg">Gerobak Street Food</h4>
+                                <p class="text-white/60 text-sm">Pasar Modern BSD</p>
+                            </div>
+                            <div class="absolute top-4 right-4 w-10 h-10 rounded-full bg-white/10 backdrop-blur-sm flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 group-hover:scale-110">
+                                <i data-lucide="expand" class="w-5 h-5 text-white"></i>
+                            </div>
                         </div>
                     </div>
                 </div>
 
-                <div class="reveal card-glow group relative rounded-2xl overflow-hidden aspect-[4/3]">
-                    <img src="https://images.unsplash.com/photo-1559329007-40df8a9345d8?w=600&h=450&fit=crop" 
-                         alt="Kiosk minuman bubble" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" loading="lazy">
-                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                        <div class="absolute bottom-0 left-0 right-0 p-6">
-                            <h4 class="text-white font-bold text-lg">Kiosk Minuman Bubble</h4>
-                            <p class="text-silver/80 text-sm">Mall Galaxy Surabaya</p>
+                <div class="reveal-scale gallery-item" data-category="mall" onclick="openLightbox(this)" style="animation-delay: 0.4s;">
+                    <div class="card-glow group relative rounded-2xl overflow-hidden aspect-[4/3] cursor-pointer">
+                        <img src="https://images.unsplash.com/photo-1559329007-40df8a9345d8?w=600&h=450&fit=crop" 
+                             alt="Kiosk minuman bubble" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" loading="lazy"
+                             data-caption="Kiosk Minuman Bubble" data-sub="Mall Galaxy Surabaya">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-400">
+                            <div class="absolute bottom-0 left-0 right-0 p-6">
+                                <div class="flex items-center gap-2 mb-2">
+                                    <span class="bg-white/20 text-white text-xs px-2 py-0.5 rounded-full font-semibold">Mall</span>
+                                </div>
+                                <h4 class="text-white font-bold text-lg">Kiosk Minuman Bubble</h4>
+                                <p class="text-white/60 text-sm">Mall Galaxy Surabaya</p>
+                            </div>
+                            <div class="absolute top-4 right-4 w-10 h-10 rounded-full bg-white/10 backdrop-blur-sm flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 group-hover:scale-110">
+                                <i data-lucide="expand" class="w-5 h-5 text-white"></i>
+                            </div>
                         </div>
                     </div>
                 </div>
 
-                <div class="reveal card-glow group relative rounded-2xl overflow-hidden aspect-[4/3]">
-                    <img src="https://images.unsplash.com/photo-1552566626-52f8b828add9?w=600&h=450&fit=crop" 
-                         alt="Gerobak franchise" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" loading="lazy">
-                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                        <div class="absolute bottom-0 left-0 right-0 p-6">
-                            <h4 class="text-white font-bold text-lg">Gerobak Franchise</h4>
-                            <p class="text-silver/80 text-sm">Berbagai Lokasi Indonesia</p>
+                <div class="reveal-scale gallery-item" data-category="custom" onclick="openLightbox(this)" style="animation-delay: 0.5s;">
+                    <div class="card-glow group relative rounded-2xl overflow-hidden aspect-[4/3] cursor-pointer">
+                        <img src="https://images.unsplash.com/photo-1552566626-52f8b828add9?w=600&h=450&fit=crop" 
+                             alt="Gerobak franchise" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" loading="lazy"
+                             data-caption="Gerobak Franchise" data-sub="Berbagai Lokasi Indonesia">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-400">
+                            <div class="absolute bottom-0 left-0 right-0 p-6">
+                                <div class="flex items-center gap-2 mb-2">
+                                    <span class="bg-primary-light/20 text-primary-light text-xs px-2 py-0.5 rounded-full font-semibold">Custom</span>
+                                </div>
+                                <h4 class="text-white font-bold text-lg">Gerobak Franchise</h4>
+                                <p class="text-white/60 text-sm">Berbagai Lokasi Indonesia</p>
+                            </div>
+                            <div class="absolute top-4 right-4 w-10 h-10 rounded-full bg-white/10 backdrop-blur-sm flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 group-hover:scale-110">
+                                <i data-lucide="expand" class="w-5 h-5 text-white"></i>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -573,146 +914,323 @@
     </section>
 
     <!-- ==================== PROSES PEMESANAN ==================== -->
-    <section id="proses" class="py-24 bg-gradient-to-b from-[#1E150D] to-brown-dark relative">
-        <div class="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-accent/30 to-transparent"></div>
+    <section id="proses" class="py-28 relative">
+        <div class="section-divider absolute top-0 left-0 right-0"></div>
 
         <div class="max-w-6xl mx-auto px-4 sm:px-6">
-            <div class="text-center mb-16 reveal">
-                <span class="inline-block text-accent text-sm font-semibold tracking-[0.2em] uppercase mb-4">Cara Pesan</span>
-                <h2 class="font-heading text-4xl sm:text-5xl font-bold text-white mb-4">
+            <div class="text-center mb-20 reveal">
+                <span class="inline-block text-accent text-xs font-bold tracking-[0.3em] uppercase mb-4 glass rounded-full px-5 py-2">Cara Pesan</span>
+                <h2 class="font-heading text-4xl sm:text-5xl lg:text-6xl font-black text-white mb-5">
                     Proses <span class="text-accent">Pemesanan</span>
                 </h2>
-                <p class="text-silver/60 max-w-2xl mx-auto text-lg">
+                <p class="text-silver/50 max-w-2xl mx-auto text-lg">
                     Hanya 4 langkah mudah untuk mendapatkan gerobak impian Anda.
                 </p>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
-                <!-- Step 1 -->
-                <div class="reveal text-center group">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 relative">
+                <!-- Connection line (desktop) -->
+                <div class="hidden lg:block absolute top-10 left-[12.5%] right-[12.5%] h-0.5 bg-gradient-to-r from-accent/20 via-accent/40 to-accent/20"></div>
+
+                <div class="reveal text-center group relative">
                     <div class="relative inline-block mb-6">
-                        <div class="w-20 h-20 rounded-2xl bg-gradient-to-br from-accent/20 to-accent/5 border border-accent/20 flex items-center justify-center mx-auto group-hover:scale-110 transition-transform duration-300">
+                        <div class="w-20 h-20 rounded-2xl bg-gradient-to-br from-accent/20 to-accent/5 border border-accent/20 flex items-center justify-center mx-auto group-hover:scale-110 group-hover:border-accent/50 transition-all duration-300 relative z-10 bg-brown-dark">
                             <i data-lucide="message-circle" class="w-9 h-9 text-accent"></i>
                         </div>
-                        <div class="absolute -top-3 -right-3 w-8 h-8 rounded-full bg-accent text-brown-dark font-bold text-sm flex items-center justify-center">1</div>
+                        <div class="absolute -top-3 -right-3 w-9 h-9 rounded-full bg-gradient-to-br from-accent to-accent-light text-brown-dark font-black text-sm flex items-center justify-center shadow-lg shadow-accent/30 z-20">1</div>
                     </div>
                     <h4 class="font-heading text-xl font-bold text-white mb-2">Konsultasi</h4>
-                    <p class="text-silver/60 text-sm leading-relaxed">Hubungi kami via WhatsApp. Ceritakan kebutuhan gerobak Anda.</p>
+                    <p class="text-silver/50 text-sm leading-relaxed">Hubungi kami via WhatsApp. Ceritakan kebutuhan gerobak Anda.</p>
                 </div>
 
-                <!-- Step 2 -->
-                <div class="reveal text-center group">
+                <div class="reveal text-center group relative" style="animation-delay: 0.15s;">
                     <div class="relative inline-block mb-6">
-                        <div class="w-20 h-20 rounded-2xl bg-gradient-to-br from-accent/20 to-accent/5 border border-accent/20 flex items-center justify-center mx-auto group-hover:scale-110 transition-transform duration-300">
+                        <div class="w-20 h-20 rounded-2xl bg-gradient-to-br from-accent/20 to-accent/5 border border-accent/20 flex items-center justify-center mx-auto group-hover:scale-110 group-hover:border-accent/50 transition-all duration-300 relative z-10 bg-brown-dark">
                             <i data-lucide="pencil-ruler" class="w-9 h-9 text-accent"></i>
                         </div>
-                        <div class="absolute -top-3 -right-3 w-8 h-8 rounded-full bg-accent text-brown-dark font-bold text-sm flex items-center justify-center">2</div>
+                        <div class="absolute -top-3 -right-3 w-9 h-9 rounded-full bg-gradient-to-br from-accent to-accent-light text-brown-dark font-black text-sm flex items-center justify-center shadow-lg shadow-accent/30 z-20">2</div>
                     </div>
                     <h4 class="font-heading text-xl font-bold text-white mb-2">Desain</h4>
-                    <p class="text-silver/60 text-sm leading-relaxed">Tim kami buatkan desain 3D. Revisi sampai Anda puas.</p>
+                    <p class="text-silver/50 text-sm leading-relaxed">Tim kami buatkan desain 3D. Revisi sampai Anda puas.</p>
                 </div>
 
-                <!-- Step 3 -->
-                <div class="reveal text-center group">
+                <div class="reveal text-center group relative" style="animation-delay: 0.3s;">
                     <div class="relative inline-block mb-6">
-                        <div class="w-20 h-20 rounded-2xl bg-gradient-to-br from-accent/20 to-accent/5 border border-accent/20 flex items-center justify-center mx-auto group-hover:scale-110 transition-transform duration-300">
+                        <div class="w-20 h-20 rounded-2xl bg-gradient-to-br from-accent/20 to-accent/5 border border-accent/20 flex items-center justify-center mx-auto group-hover:scale-110 group-hover:border-accent/50 transition-all duration-300 relative z-10 bg-brown-dark">
                             <i data-lucide="hammer" class="w-9 h-9 text-accent"></i>
                         </div>
-                        <div class="absolute -top-3 -right-3 w-8 h-8 rounded-full bg-accent text-brown-dark font-bold text-sm flex items-center justify-center">3</div>
+                        <div class="absolute -top-3 -right-3 w-9 h-9 rounded-full bg-gradient-to-br from-accent to-accent-light text-brown-dark font-black text-sm flex items-center justify-center shadow-lg shadow-accent/30 z-20">3</div>
                     </div>
                     <h4 class="font-heading text-xl font-bold text-white mb-2">Produksi</h4>
-                    <p class="text-silver/60 text-sm leading-relaxed">Gerobak diproduksi dengan material berkualitas tinggi.</p>
+                    <p class="text-silver/50 text-sm leading-relaxed">Gerobak diproduksi dengan material berkualitas tinggi.</p>
                 </div>
 
-                <!-- Step 4 -->
-                <div class="reveal text-center group">
+                <div class="reveal text-center group relative" style="animation-delay: 0.45s;">
                     <div class="relative inline-block mb-6">
-                        <div class="w-20 h-20 rounded-2xl bg-gradient-to-br from-accent/20 to-accent/5 border border-accent/20 flex items-center justify-center mx-auto group-hover:scale-110 transition-transform duration-300">
+                        <div class="w-20 h-20 rounded-2xl bg-gradient-to-br from-accent/20 to-accent/5 border border-accent/20 flex items-center justify-center mx-auto group-hover:scale-110 group-hover:border-accent/50 transition-all duration-300 relative z-10 bg-brown-dark">
                             <i data-lucide="truck" class="w-9 h-9 text-accent"></i>
                         </div>
-                        <div class="absolute -top-3 -right-3 w-8 h-8 rounded-full bg-accent text-brown-dark font-bold text-sm flex items-center justify-center">4</div>
+                        <div class="absolute -top-3 -right-3 w-9 h-9 rounded-full bg-gradient-to-br from-accent to-accent-light text-brown-dark font-black text-sm flex items-center justify-center shadow-lg shadow-accent/30 z-20">4</div>
                     </div>
-                    <h4 class="font-heading text-xl font-bold text-white mb-2">Kirim</h4>
-                    <p class="text-silver/60 text-sm leading-relaxed">Gerobak dikirim dan dipasang di lokasi Anda. Siap pakai!</p>
+                    <h4 class="font-heading text-xl font-bold text-white mb-2">Kirim & Pasang</h4>
+                    <p class="text-silver/50 text-sm leading-relaxed">Gerobak dikirim dan dipasang di lokasi Anda. Siap pakai!</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== TESTIMONI ==================== -->
+    <section id="testimoni" class="py-28 relative overflow-hidden">
+        <div class="section-divider absolute top-0 left-0 right-0"></div>
+
+        <div class="max-w-6xl mx-auto px-4 sm:px-6">
+            <div class="text-center mb-16 reveal">
+                <span class="inline-block text-accent text-xs font-bold tracking-[0.3em] uppercase mb-4 glass rounded-full px-5 py-2">Testimoni</span>
+                <h2 class="font-heading text-4xl sm:text-5xl lg:text-6xl font-black text-white mb-5">
+                    Apa Kata <span class="text-accent">Mereka</span>?
+                </h2>
+                <p class="text-silver/50 max-w-2xl mx-auto text-lg">
+                    Kepuasan klien adalah prioritas utama kami.
+                </p>
+            </div>
+
+            <!-- Testimonial Slider -->
+            <div class="relative reveal">
+                <div class="overflow-hidden rounded-3xl">
+                    <div class="testimonial-track" id="testimonialTrack">
+                        <!-- Testimonial 1 -->
+                        <div class="w-full flex-shrink-0 px-4">
+                            <div class="glass rounded-3xl p-8 sm:p-12 max-w-3xl mx-auto text-center">
+                                <div class="flex justify-center gap-1 mb-6">
+                                    <span class="text-accent text-2xl">★</span>
+                                    <span class="text-accent text-2xl">★</span>
+                                    <span class="text-accent text-2xl">★</span>
+                                    <span class="text-accent text-2xl">★</span>
+                                    <span class="text-accent text-2xl">★</span>
+                                </div>
+                                <p class="text-white/80 text-lg sm:text-xl leading-relaxed mb-8 italic">
+                                    "Gerobaknya <strong class="text-accent">premium banget!</strong> Desainnya sesuai permintaan, material kokoh, dan finishing-nya rapi. Sekarang gerobak saya jadi yang paling ramai di food court. Terima kasih Gerobak Ku!"
+                                </p>
+                                <div class="flex items-center justify-center gap-4">
+                                    <div class="w-14 h-14 rounded-full bg-gradient-to-br from-accent to-primary-light flex items-center justify-center text-brown-dark font-bold text-xl">R</div>
+                                    <div class="text-left">
+                                        <p class="text-white font-bold text-lg">Rina Susanti</p>
+                                        <p class="text-silver/50 text-sm">Owner — Rina's Kitchen, Jakarta</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Testimonial 2 -->
+                        <div class="w-full flex-shrink-0 px-4">
+                            <div class="glass rounded-3xl p-8 sm:p-12 max-w-3xl mx-auto text-center">
+                                <div class="flex justify-center gap-1 mb-6">
+                                    <span class="text-accent text-2xl">★</span>
+                                    <span class="text-accent text-2xl">★</span>
+                                    <span class="text-accent text-2xl">★</span>
+                                    <span class="text-accent text-2xl">★</span>
+                                    <span class="text-accent text-2xl">★</span>
+                                </div>
+                                <p class="text-white/80 text-lg sm:text-xl leading-relaxed mb-8 italic">
+                                    "Kami butuh 15 kiosk untuk franchise di 3 kota. Gerobak Ku handle semuanya dengan <strong class="text-accent">profesional dan tepat waktu</strong>. Kualitas konsisten di setiap kiosk. Highly recommended!"
+                                </p>
+                                <div class="flex items-center justify-center gap-4">
+                                    <div class="w-14 h-14 rounded-full bg-gradient-to-br from-accent to-primary-light flex items-center justify-center text-brown-dark font-bold text-xl">B</div>
+                                    <div class="text-left">
+                                        <p class="text-white font-bold text-lg">Budi Hartono</p>
+                                        <p class="text-silver/50 text-sm">CEO — Bakso Sejahtera Group</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Testimonial 3 -->
+                        <div class="w-full flex-shrink-0 px-4">
+                            <div class="glass rounded-3xl p-8 sm:p-12 max-w-3xl mx-auto text-center">
+                                <div class="flex justify-center gap-1 mb-6">
+                                    <span class="text-accent text-2xl">★</span>
+                                    <span class="text-accent text-2xl">★</span>
+                                    <span class="text-accent text-2xl">★</span>
+                                    <span class="text-accent text-2xl">★</span>
+                                    <span class="text-accent text-2xl">★</span>
+                                </div>
+                                <p class="text-white/80 text-lg sm:text-xl leading-relaxed mb-8 italic">
+                                    "Dari desain sampai pasang, semuanya <strong class="text-accent">smooth banget</strong>. Tim-nya ramah, responsif, dan mau revisi sampai puas. Gerobak kopi saya sekarang keliatan profesional. Worth it!"
+                                </p>
+                                <div class="flex items-center justify-center gap-4">
+                                    <div class="w-14 h-14 rounded-full bg-gradient-to-br from-accent to-primary-light flex items-center justify-center text-brown-dark font-bold text-xl">D</div>
+                                    <div class="text-left">
+                                        <p class="text-white font-bold text-lg">Dewi Lestari</p>
+                                        <p class="text-silver/50 text-sm">Founder — Kopi Dewi, Surabaya</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Navigation -->
+                <div class="flex justify-center items-center gap-4 mt-8">
+                    <button onclick="slideTestimonial(-1)" class="w-12 h-12 rounded-full glass hover:bg-white/10 flex items-center justify-center transition-all duration-300 hover:scale-110">
+                        <i data-lucide="chevron-left" class="w-5 h-5 text-white"></i>
+                    </button>
+                    <div class="flex gap-2" id="testimonialDots">
+                        <button onclick="goToTestimonial(0)" class="w-3 h-3 rounded-full bg-accent transition-all duration-300"></button>
+                        <button onclick="goToTestimonial(1)" class="w-3 h-3 rounded-full bg-white/20 transition-all duration-300"></button>
+                        <button onclick="goToTestimonial(2)" class="w-3 h-3 rounded-full bg-white/20 transition-all duration-300"></button>
+                    </div>
+                    <button onclick="slideTestimonial(1)" class="w-12 h-12 rounded-full glass hover:bg-white/10 flex items-center justify-center transition-all duration-300 hover:scale-110">
+                        <i data-lucide="chevron-right" class="w-5 h-5 text-white"></i>
+                    </button>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- ==================== KEUNGGULAN ==================== -->
-    <section class="py-24 bg-brown-dark relative">
-        <div class="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-accent/30 to-transparent"></div>
+    <section class="py-28 relative">
+        <div class="section-divider absolute top-0 left-0 right-0"></div>
 
         <div class="max-w-6xl mx-auto px-4 sm:px-6">
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-                <!-- Left: Content -->
-                <div class="reveal">
-                    <span class="inline-block text-accent text-sm font-semibold tracking-[0.2em] uppercase mb-4">Milih Kami</span>
-                    <h2 class="font-heading text-4xl sm:text-5xl font-bold text-white mb-6">
+                <div class="reveal-left">
+                    <span class="inline-block text-accent text-xs font-bold tracking-[0.3em] uppercase mb-4 glass rounded-full px-5 py-2">Milih Kami</span>
+                    <h2 class="font-heading text-4xl sm:text-5xl font-black text-white mb-6">
                         Kenapa <span class="text-accent">Gerobak Ku</span>?
                     </h2>
-                    <p class="text-silver/60 text-lg mb-10 leading-relaxed">
-                        Kami bukan sekadar pembuat gerobak. Kami adalah partner bisnis Anda yang membantu mewujudkan gerobak impian dengan kualitas terbaik.
+                    <p class="text-silver/50 text-lg mb-10 leading-relaxed">
+                        Kami bukan sekadar pembuat gerobak. Kami adalah partner bisnis Anda.
                     </p>
 
                     <div class="space-y-6">
-                        <div class="flex gap-4 items-start">
-                            <div class="w-12 h-12 rounded-xl bg-accent/10 flex items-center justify-center flex-shrink-0">
+                        <div class="flex gap-4 items-start group">
+                            <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-accent/20 to-accent/5 flex items-center justify-center flex-shrink-0 border border-accent/10 group-hover:border-accent/30 group-hover:scale-110 transition-all duration-300">
                                 <i data-lucide="shield-check" class="w-6 h-6 text-accent"></i>
                             </div>
                             <div>
                                 <h4 class="text-white font-bold text-lg mb-1">Garansi Kualitas</h4>
-                                <p class="text-silver/60 text-sm">Semua produk bergaransi. Material premium, tahan lama, dan anti karat.</p>
+                                <p class="text-silver/50 text-sm leading-relaxed">Semua produk bergaransi. Material premium, tahan lama, dan anti karat.</p>
                             </div>
                         </div>
 
-                        <div class="flex gap-4 items-start">
-                            <div class="w-12 h-12 rounded-xl bg-accent/10 flex items-center justify-center flex-shrink-0">
+                        <div class="flex gap-4 items-start group">
+                            <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-accent/20 to-accent/5 flex items-center justify-center flex-shrink-0 border border-accent/10 group-hover:border-accent/30 group-hover:scale-110 transition-all duration-300">
                                 <i data-lucide="palette" class="w-6 h-6 text-accent"></i>
                             </div>
                             <div>
                                 <h4 class="text-white font-bold text-lg mb-1">Desain Eksklusif</h4>
-                                <p class="text-silver/60 text-sm">Setiap gerobak didesain unik sesuai brand dan kebutuhan bisnis Anda.</p>
+                                <p class="text-silver/50 text-sm leading-relaxed">Setiap gerobak didesain unik sesuai brand dan kebutuhan bisnis Anda.</p>
                             </div>
                         </div>
 
-                        <div class="flex gap-4 items-start">
-                            <div class="w-12 h-12 rounded-xl bg-accent/10 flex items-center justify-center flex-shrink-0">
+                        <div class="flex gap-4 items-start group">
+                            <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-accent/20 to-accent/5 flex items-center justify-center flex-shrink-0 border border-accent/10 group-hover:border-accent/30 group-hover:scale-110 transition-all duration-300">
                                 <i data-lucide="banknote" class="w-6 h-6 text-accent"></i>
                             </div>
                             <div>
                                 <h4 class="text-white font-bold text-lg mb-1">Harga Kompetitif</h4>
-                                <p class="text-silver/60 text-sm">Kualitas premium dengan harga terjangkau. Tersedia cicilan tanpa kartu kredit.</p>
+                                <p class="text-silver/50 text-sm leading-relaxed">Kualitas premium dengan harga terjangkau. Cicilan tersedia.</p>
                             </div>
                         </div>
 
-                        <div class="flex gap-4 items-start">
-                            <div class="w-12 h-12 rounded-xl bg-accent/10 flex items-center justify-center flex-shrink-0">
+                        <div class="flex gap-4 items-start group">
+                            <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-accent/20 to-accent/5 flex items-center justify-center flex-shrink-0 border border-accent/10 group-hover:border-accent/30 group-hover:scale-110 transition-all duration-300">
                                 <i data-lucide="headphones" class="w-6 h-6 text-accent"></i>
                             </div>
                             <div>
                                 <h4 class="text-white font-bold text-lg mb-1">After Sales Terbaik</h4>
-                                <p class="text-silver/60 text-sm">Layanan purna jual responsif. Perbaikan dan maintenance kapan saja.</p>
+                                <p class="text-silver/50 text-sm leading-relaxed">Layanan purna jual responsif. Perbaikan dan maintenance kapan saja.</p>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Right: Image -->
-                <div class="reveal relative">
+                <div class="reveal-right relative">
                     <div class="relative rounded-3xl overflow-hidden">
                         <img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=600&h=700&fit=crop" 
                              alt="Workshop Gerobak Ku" 
-                             class="w-full h-[500px] object-cover"
+                             class="w-full h-[550px] object-cover"
                              loading="lazy">
-                        <div class="absolute inset-0 bg-gradient-to-t from-brown-dark/60 to-transparent"></div>
+                        <div class="absolute inset-0 bg-gradient-to-t from-brown-dark/80 via-transparent to-transparent"></div>
                     </div>
-                    <!-- Floating badge -->
-                    <div class="absolute -bottom-6 -left-6 bg-accent rounded-2xl p-6 shadow-2xl shadow-accent/30 animate-float">
+                    <div class="absolute -bottom-6 -left-6 bg-gradient-to-br from-accent to-accent-light rounded-2xl p-6 shadow-2xl shadow-accent/30 animate-float">
                         <div class="text-center">
-                            <div class="text-3xl font-heading font-bold text-brown-dark">10+</div>
-                            <div class="text-brown-dark/80 text-sm font-medium">Tahun<br>Pengalaman</div>
+                            <div class="text-4xl font-heading font-black text-brown-dark">10+</div>
+                            <div class="text-brown-dark/70 text-sm font-semibold">Tahun<br>Pengalaman</div>
                         </div>
+                    </div>
+                    <div class="absolute -top-4 -right-4 bg-white/10 backdrop-blur-xl rounded-2xl p-4 border border-white/10 animate-float" style="animation-delay: 1s;">
+                        <div class="flex items-center gap-2">
+                            <span class="text-accent text-xl">★</span>
+                            <span class="text-white font-bold text-lg">4.9</span>
+                            <span class="text-white/50 text-xs">Rating</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== FAQ ==================== -->
+    <section id="faq" class="py-28 relative">
+        <div class="section-divider absolute top-0 left-0 right-0"></div>
+
+        <div class="max-w-3xl mx-auto px-4 sm:px-6">
+            <div class="text-center mb-16 reveal">
+                <span class="inline-block text-accent text-xs font-bold tracking-[0.3em] uppercase mb-4 glass rounded-full px-5 py-2">FAQ</span>
+                <h2 class="font-heading text-4xl sm:text-5xl font-black text-white mb-5">
+                    Pertanyaan <span class="text-accent">Umum</span>
+                </h2>
+            </div>
+
+            <div class="space-y-4" id="faqContainer">
+                <div class="faq-item glass rounded-2xl overflow-hidden reveal cursor-pointer" onclick="toggleFaq(this)">
+                    <div class="flex items-center justify-between p-6">
+                        <h4 class="text-white font-semibold text-base pr-4">Berapa lama proses pembuatan gerobak?</h4>
+                        <span class="faq-icon text-accent text-2xl flex-shrink-0 w-8 h-8 flex items-center justify-center">+</span>
+                    </div>
+                    <div class="faq-answer px-6">
+                        <p class="text-silver/60 text-sm leading-relaxed pb-6">Tergantung jenis dan kompleksitas desain. Untuk gerobak standar F&B, estimasi 7-14 hari kerja. Kiosk counter mall 14-21 hari kerja. Custom design 21-30 hari kerja. Kami akan memberikan timeline pasti setelah desain disetujui.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item glass rounded-2xl overflow-hidden reveal cursor-pointer" onclick="toggleFaq(this)">
+                    <div class="flex items-center justify-between p-6">
+                        <h4 class="text-white font-semibold text-base pr-4">Apakah bisa kirim ke luar kota?</h4>
+                        <span class="faq-icon text-accent text-2xl flex-shrink-0 w-8 h-8 flex items-center justify-center">+</span>
+                    </div>
+                    <div class="faq-answer px-6">
+                        <p class="text-silver/60 text-sm leading-relaxed pb-6">Ya! Kami melayani pengiriman ke seluruh Indonesia. Untuk area Jawa Timur, pengiriman menggunakan armada sendiri. Untuar luar Jawa, kami bekerja sama dengan ekspedisi terpercaya. Biaya pengiriman dihitung berdasarkan jarak dan ukuran gerobak.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item glass rounded-2xl overflow-hidden reveal cursor-pointer" onclick="toggleFaq(this)">
+                    <div class="flex items-center justify-between p-6">
+                        <h4 class="text-white font-semibold text-base pr-4">Apakah ada garansi?</h4>
+                        <span class="faq-icon text-accent text-2xl flex-shrink-0 w-8 h-8 flex items-center justify-center">+</span>
+                    </div>
+                    <div class="faq-answer px-6">
+                        <p class="text-silver/60 text-sm leading-relaxed pb-6">Tentu! Semua gerobak kami bergaransi 1 tahun untuk kerangka dan struktur. Garansi meliputi perbaikan kerusakan akibat kesalahan produksi. Untuk kerusakan akibat pemakaian, kami menyediakan layanan perbaikan dengan biaya terjangkau.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item glass rounded-2xl overflow-hidden reveal cursor-pointer" onclick="toggleFaq(this)">
+                    <div class="flex items-center justify-between p-6">
+                        <h4 class="text-white font-semibold text-base pr-4">Bagaimana sistem pembayarannya?</h4>
+                        <span class="faq-icon text-accent text-2xl flex-shrink-0 w-8 h-8 flex items-center justify-center">+</span>
+                    </div>
+                    <div class="faq-answer px-6">
+                        <p class="text-silver/60 text-sm leading-relaxed pb-6">DP 50% saat desain disetujui, dan pelunasan 50% saat gerobak selesai dan siap kirim. Kami juga menyediakan opsi cicilan tanpa kartu kredit untuk pembelian di atas Rp 10 juta. Transfer bank atau cash accepted.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item glass rounded-2xl overflow-hidden reveal cursor-pointer" onclick="toggleFaq(this)">
+                    <div class="flex items-center justify-between p-6">
+                        <h4 class="text-white font-semibold text-base pr-4">Bisa request desain dari gambar referensi?</h4>
+                        <span class="faq-icon text-accent text-2xl flex-shrink-0 w-8 h-8 flex items-center justify-center">+</span>
+                    </div>
+                    <div class="faq-answer px-6">
+                        <p class="text-silver/60 text-sm leading-relaxed pb-6">Bisa banget! Kirimkan gambar referensi atau moodboard ke tim kami, dan kami akan buatkan desain 3D berdasarkan referensi tersebut. Revisi bisa dilakukan sampai desain benar-benar sesuai keinginan Anda.</p>
                     </div>
                 </div>
             </div>
@@ -720,50 +1238,48 @@
     </section>
 
     <!-- ==================== KONTAK / CTA ==================== -->
-    <section id="kontak" class="py-24 bg-gradient-to-b from-brown-dark to-[#1A120B] relative">
-        <div class="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-accent/30 to-transparent"></div>
+    <section id="kontak" class="py-28 relative">
+        <div class="section-divider absolute top-0 left-0 right-0"></div>
 
-        <div class="max-w-4xl mx-auto px-4 sm:px-6 text-center">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 text-center">
             <div class="reveal">
-                <span class="inline-block text-accent text-sm font-semibold tracking-[0.2em] uppercase mb-4">Siap Memulai?</span>
-                <h2 class="font-heading text-4xl sm:text-5xl font-bold text-white mb-6">
+                <span class="inline-block text-accent text-xs font-bold tracking-[0.3em] uppercase mb-4 glass rounded-full px-5 py-2">Siap Memulai?</span>
+                <h2 class="font-heading text-4xl sm:text-5xl lg:text-6xl font-black text-white mb-6">
                     Wujudkan Gerobak <span class="text-accent">Impian Anda</span>
                 </h2>
-                <p class="text-silver/60 text-lg mb-10 max-w-2xl mx-auto leading-relaxed">
+                <p class="text-silver/50 text-lg mb-12 max-w-2xl mx-auto leading-relaxed">
                     Konsultasi gratis! Ceritakan kebutuhan gerobak Anda dan kami akan bantu dari desain hingga produksi.
                 </p>
             </div>
 
-            <!-- CTA Card -->
-            <div class="reveal glass rounded-3xl p-8 sm:p-12 max-w-2xl mx-auto">
-                <div class="space-y-6">
-                    <!-- WhatsApp CTA -->
+            <div class="reveal glass rounded-3xl p-8 sm:p-12 max-w-3xl mx-auto animate-glow">
+                <div class="space-y-8">
                     <a href="https://wa.me/628xxxxxxxxx?text=Halo%20Gerobak%20Ku%2C%20saya%20mau%20konsultasi%20tentang%20pembuatan%20gerobak" 
-                       class="relative block w-full bg-gradient-to-r from-[#25D366] to-[#128C7E] text-white py-5 rounded-2xl font-bold text-lg hover:scale-[1.02] transition-all duration-300 shadow-xl shadow-[#25D366]/25">
-                        <span class="flex items-center justify-center gap-3">
+                       class="relative block w-full bg-gradient-to-r from-[#25D366] to-[#128C7E] text-white py-5 rounded-2xl font-bold text-lg hover:scale-[1.02] transition-all duration-300 shadow-xl shadow-[#25D366]/25 overflow-hidden group">
+                        <span class="flex items-center justify-center gap-3 relative z-10">
                             <svg class="w-7 h-7" fill="currentColor" viewBox="0 0 24 24">
                                 <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
                             </svg>
                             Chat via WhatsApp
                         </span>
+                        <span class="absolute inset-0 bg-white/10 translate-y-full group-hover:translate-y-0 transition-transform duration-500"></span>
                     </a>
 
-                    <!-- Info -->
-                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 text-center">
-                        <div class="bg-white/5 rounded-xl p-4">
-                            <i data-lucide="clock" class="w-6 h-6 text-accent mx-auto mb-2"></i>
-                            <p class="text-white font-semibold text-sm">Jam Kerja</p>
-                            <p class="text-silver/60 text-xs">Senin-Sabtu<br>08.00 - 17.00</p>
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                        <div class="bg-white/5 rounded-2xl p-5 hover:bg-white/8 transition-colors duration-300 group">
+                            <i data-lucide="clock" class="w-7 h-7 text-accent mx-auto mb-3 group-hover:scale-110 transition-transform"></i>
+                            <p class="text-white font-bold text-sm">Jam Kerja</p>
+                            <p class="text-silver/50 text-xs mt-1">Senin-Sabtu<br>08.00 - 17.00 WIB</p>
                         </div>
-                        <div class="bg-white/5 rounded-xl p-4">
-                            <i data-lucide="map-pin" class="w-6 h-6 text-accent mx-auto mb-2"></i>
-                            <p class="text-white font-semibold text-sm">Workshop</p>
-                            <p class="text-silver/60 text-xs">Sidoarjo<br>Jawa Timur</p>
+                        <div class="bg-white/5 rounded-2xl p-5 hover:bg-white/8 transition-colors duration-300 group">
+                            <i data-lucide="map-pin" class="w-7 h-7 text-accent mx-auto mb-3 group-hover:scale-110 transition-transform"></i>
+                            <p class="text-white font-bold text-sm">Workshop</p>
+                            <p class="text-silver/50 text-xs mt-1">Sidoarjo<br>Jawa Timur</p>
                         </div>
-                        <div class="bg-white/5 rounded-xl p-4">
-                            <i data-lucide="truck" class="w-6 h-6 text-accent mx-auto mb-2"></i>
-                            <p class="text-white font-semibold text-sm">Pengiriman</p>
-                            <p class="text-silver/60 text-xs">Seluruh<br>Indonesia</p>
+                        <div class="bg-white/5 rounded-2xl p-5 hover:bg-white/8 transition-colors duration-300 group">
+                            <i data-lucide="truck" class="w-7 h-7 text-accent mx-auto mb-3 group-hover:scale-110 transition-transform"></i>
+                            <p class="text-white font-bold text-sm">Pengiriman</p>
+                            <p class="text-silver/50 text-xs mt-1">Seluruh<br>Indonesia</p>
                         </div>
                     </div>
                 </div>
@@ -772,19 +1288,47 @@
     </section>
 
     <!-- ==================== FOOTER ==================== -->
-    <footer class="bg-[#0D0A07] py-12 border-t border-white/5">
+    <footer class="bg-[#0D0A07] py-16 border-t border-white/5">
         <div class="max-w-6xl mx-auto px-4 sm:px-6">
-            <div class="flex flex-col md:flex-row justify-between items-center gap-6">
-                <div class="flex items-center gap-3">
-                    <img src="images/logo.svg" alt="Gerobak Ku" class="w-10 h-10 rounded-full">
-                    <div>
-                        <span class="font-heading font-bold text-white text-lg">GEROBAK<span class="text-accent"> KU</span></span>
-                        <p class="text-silver/40 text-xs">Gerobak Berkah Untuk Kita Semua</p>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-12 mb-12">
+                <div>
+                    <div class="flex items-center gap-3 mb-4">
+                        <img src="images/logo.svg" alt="Gerobak Ku" class="w-10 h-10 rounded-full">
+                        <span class="font-heading font-bold text-white text-xl">GEROBAK<span class="text-accent"> KU</span></span>
+                    </div>
+                    <p class="text-silver/40 text-sm leading-relaxed">Gerobak Berkah Untuk Kita Semua. Spesialis pembuatan gerobak berkualitas tinggi untuk bisnis Anda.</p>
+                </div>
+                <div>
+                    <h4 class="text-white font-bold mb-4">Navigasi</h4>
+                    <div class="space-y-2">
+                        <a href="#beranda" class="block text-silver/40 hover:text-accent text-sm transition-colors">Beranda</a>
+                        <a href="#layanan" class="block text-silver/40 hover:text-accent text-sm transition-colors">Layanan</a>
+                        <a href="#galeri" class="block text-silver/40 hover:text-accent text-sm transition-colors">Galeri</a>
+                        <a href="#testimoni" class="block text-silver/40 hover:text-accent text-sm transition-colors">Testimoni</a>
+                        <a href="#faq" class="block text-silver/40 hover:text-accent text-sm transition-colors">FAQ</a>
                     </div>
                 </div>
-                <p class="text-silver/40 text-sm text-center md:text-right">
-                    &copy; 2026 Gerobak Ku. All rights reserved.<br>
-                    <span class="text-silver/30">Crafted with ❤️ for UMKM Indonesia</span>
+                <div>
+                    <h4 class="text-white font-bold mb-4">Hubungi Kami</h4>
+                    <div class="space-y-3">
+                        <a href="https://wa.me/628xxxxxxxxx" class="flex items-center gap-3 text-silver/40 hover:text-accent text-sm transition-colors">
+                            <i data-lucide="phone" class="w-4 h-4"></i> +62 8XX-XXXX-XXXX
+                        </a>
+                        <p class="flex items-center gap-3 text-silver/40 text-sm">
+                            <i data-lucide="mail" class="w-4 h-4"></i> info@gerobakku.com
+                        </p>
+                        <p class="flex items-center gap-3 text-silver/40 text-sm">
+                            <i data-lucide="map-pin" class="w-4 h-4"></i> Sidoarjo, Jawa Timur
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-white/5 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+                <p class="text-silver/30 text-sm">
+                    &copy; 2026 Gerobak Ku. All rights reserved.
+                </p>
+                <p class="text-silver/20 text-xs">
+                    Crafted with ❤️ for UMKM Indonesia
                 </p>
             </div>
         </div>
@@ -798,39 +1342,82 @@
         </svg>
     </a>
 
+    <!-- ==================== BACK TO TOP ==================== -->
+    <button id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+        <i data-lucide="arrow-up" class="w-5 h-5 text-brown-dark"></i>
+    </button>
+
     <!-- ==================== SCRIPTS ==================== -->
     <script>
-        // Initialize Lucide icons
+        // ===== PRELOADER =====
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                document.getElementById('preloader').classList.add('loaded');
+            }, 2200);
+        });
+
+        // ===== INIT LUCIDE =====
         lucide.createIcons();
 
-        // Navbar scroll effect
+        // ===== NAVBAR SCROLL =====
         const navbar = document.getElementById('navbar');
+        const backToTop = document.getElementById('backToTop');
+        const sections = document.querySelectorAll('section[id]');
+        const navLinks = document.querySelectorAll('.nav-link');
+
         window.addEventListener('scroll', () => {
+            // Navbar bg
             if (window.scrollY > 50) {
-                navbar.classList.add('bg-brown-dark/90', 'backdrop-blur-xl', 'shadow-2xl', 'shadow-black/20');
-                navbar.classList.remove('bg-transparent');
+                navbar.classList.add('bg-brown-dark/95', 'backdrop-blur-xl', 'shadow-2xl', 'shadow-black/30');
             } else {
-                navbar.classList.remove('bg-brown-dark/90', 'backdrop-blur-xl', 'shadow-2xl', 'shadow-black/20');
-                navbar.classList.add('bg-transparent');
+                navbar.classList.remove('bg-brown-dark/95', 'backdrop-blur-xl', 'shadow-2xl', 'shadow-black/30');
             }
-        });
 
-        // Mobile menu toggle
-        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-        const mobileMenu = document.getElementById('mobileMenu');
-        mobileMenuBtn.addEventListener('click', () => {
-            mobileMenu.classList.toggle('hidden');
-        });
+            // Back to top
+            if (window.scrollY > 500) {
+                backToTop.classList.add('visible');
+            } else {
+                backToTop.classList.remove('visible');
+            }
 
-        // Close mobile menu on link click
-        mobileMenu.querySelectorAll('a').forEach(link => {
-            link.addEventListener('click', () => {
-                mobileMenu.classList.add('hidden');
+            // Active nav link
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop - 100;
+                if (window.scrollY >= sectionTop) {
+                    current = section.getAttribute('id');
+                }
+            });
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === '#' + current) {
+                    link.classList.add('active');
+                }
             });
         });
 
-        // Scroll reveal animation
-        const revealElements = document.querySelectorAll('.reveal');
+        // ===== MOBILE MENU =====
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobileMenu');
+            const overlay = document.getElementById('menuOverlay');
+            menu.classList.toggle('open');
+            overlay.classList.toggle('hidden');
+            document.body.style.overflow = menu.classList.contains('open') ? 'hidden' : '';
+        }
+
+        document.getElementById('mobileMenuBtn').addEventListener('click', toggleMobileMenu);
+
+        document.querySelectorAll('.mobile-link').forEach(link => {
+            link.addEventListener('click', () => {
+                const menu = document.getElementById('mobileMenu');
+                const overlay = document.getElementById('menuOverlay');
+                menu.classList.remove('open');
+                overlay.classList.add('hidden');
+                document.body.style.overflow = '';
+            });
+        });
+
+        // ===== SCROLL REVEAL =====
         const revealObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
@@ -838,14 +1425,16 @@
                     revealObserver.unobserve(entry.target);
                 }
             });
-        }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+        }, { threshold: 0.1, rootMargin: '0px 0px -60px 0px' });
 
-        revealElements.forEach(el => revealObserver.observe(el));
+        document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-scale').forEach(el => {
+            revealObserver.observe(el);
+        });
 
-        // Counter animation
+        // ===== COUNTER ANIMATION =====
         function animateCounter(el, target) {
             let current = 0;
-            const increment = target / 60;
+            const increment = target / 80;
             const timer = setInterval(() => {
                 current += increment;
                 if (current >= target) {
@@ -853,7 +1442,7 @@
                     clearInterval(timer);
                 }
                 el.textContent = Math.floor(current) + '+';
-            }, 30);
+            }, 20);
         }
 
         const counterObserver = new IntersectionObserver((entries) => {
@@ -866,10 +1455,9 @@
                 }
             });
         }, { threshold: 0.5 });
-
         counterObserver.observe(document.getElementById('counter1'));
 
-        // Smooth scroll for anchor links
+        // ===== SMOOTH SCROLL =====
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function(e) {
                 e.preventDefault();
@@ -879,6 +1467,83 @@
                 }
             });
         });
+
+        // ===== GALLERY FILTER =====
+        function filterGallery(category) {
+            const items = document.querySelectorAll('.gallery-item');
+            const btns = document.querySelectorAll('.filter-btn');
+            
+            btns.forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+
+            items.forEach(item => {
+                if (category === 'all' || item.dataset.category === category) {
+                    item.style.display = 'block';
+                    setTimeout(() => {
+                        item.style.opacity = '1';
+                        item.style.transform = 'scale(1)';
+                    }, 50);
+                } else {
+                    item.style.opacity = '0';
+                    item.style.transform = 'scale(0.8)';
+                    setTimeout(() => { item.style.display = 'none'; }, 400);
+                }
+            });
+        }
+
+        // ===== LIGHTBOX =====
+        function openLightbox(el) {
+            const img = el.querySelector('img');
+            const lb = document.getElementById('lightbox');
+            document.getElementById('lightboxImg').src = img.src;
+            document.getElementById('lightboxCaption').textContent = img.dataset.caption || '';
+            document.getElementById('lightboxSub').textContent = img.dataset.sub || '';
+            lb.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeLightbox() {
+            document.getElementById('lightbox').classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') closeLightbox();
+        });
+
+        // ===== TESTIMONIAL SLIDER =====
+        let currentTestimonial = 0;
+        const totalTestimonials = 3;
+
+        function slideTestimonial(dir) {
+            currentTestimonial = (currentTestimonial + dir + totalTestimonials) % totalTestimonials;
+            updateTestimonial();
+        }
+
+        function goToTestimonial(index) {
+            currentTestimonial = index;
+            updateTestimonial();
+        }
+
+        function updateTestimonial() {
+            const track = document.getElementById('testimonialTrack');
+            track.style.transform = `translateX(-${currentTestimonial * 100}%)`;
+            
+            const dots = document.getElementById('testimonialDots').children;
+            for (let i = 0; i < dots.length; i++) {
+                dots[i].className = `w-3 h-3 rounded-full transition-all duration-300 ${i === currentTestimonial ? 'bg-accent' : 'bg-white/20'}`;
+            }
+        }
+
+        // Auto-slide testimonials
+        setInterval(() => slideTestimonial(1), 6000);
+
+        // ===== FAQ ACCORDION =====
+        function toggleFaq(el) {
+            const isActive = el.classList.contains('active');
+            document.querySelectorAll('.faq-item').forEach(item => item.classList.remove('active'));
+            if (!isActive) el.classList.add('active');
+        }
     </script>
 </body>
 </html>
