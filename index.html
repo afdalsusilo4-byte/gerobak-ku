@@ -358,6 +358,112 @@
         ::selection {
             background: rgba(212,168,67,0.3); color: #fff;
         }
+
+        /* ===== MOBILE OPTIMIZATIONS ===== */
+        @media (max-width: 640px) {
+            /* Hero - smaller text on mobile */
+            .hero-heading { font-size: 2.5rem !important; line-height: 1.15 !important; }
+            .hero-subtitle { font-size: 1.75rem !important; }
+            .hero-badge { font-size: 0.7rem; padding: 0.5rem 1rem; }
+            .hero-desc { font-size: 0.95rem; margin-bottom: 2rem; }
+            .hero-cta { padding: 0.75rem 1.5rem; font-size: 0.9rem; }
+
+            /* Stats - tighter on mobile */
+            .stats-grid { gap: 0.5rem !important; }
+            .stats-grid .glass { padding: 0.75rem 0.5rem; }
+            .stats-grid .text-3xl { font-size: 1.5rem !important; }
+
+            /* Sections - less padding on mobile */
+            .section-py { padding-top: 3.5rem; padding-bottom: 3.5rem; }
+
+            /* Service cards - compact on mobile */
+            .service-card-img { height: 180px !important; }
+            .service-card-body { padding: 1.25rem !important; }
+            .service-card-body .text-2xl { font-size: 1.2rem !important; }
+            .service-card-body .space-y-3 { margin-bottom: 1rem !important; }
+
+            /* Gallery filter - scrollable on mobile */
+            .filter-scroll {
+                flex-wrap: nowrap !important;
+                overflow-x: auto;
+                -webkit-overflow-scrolling: touch;
+                scrollbar-width: none;
+                padding-bottom: 0.5rem;
+                gap: 0.5rem !important;
+            }
+            .filter-scroll::-webkit-scrollbar { display: none; }
+            .filter-scroll .filter-btn {
+                white-space: nowrap;
+                flex-shrink: 0;
+                padding: 0.5rem 1rem !important;
+                font-size: 0.8rem;
+            }
+
+            /* Process steps - 2x2 grid on mobile */
+            .process-grid { grid-template-columns: 1fr 1fr !important; gap: 1rem !important; }
+            .process-grid .w-20 { width: 3.5rem; height: 3.5rem; }
+            .process-grid .w-20 i { width: 1.25rem; height: 1.25rem; }
+            .process-grid h4 { font-size: 0.9rem !important; }
+            .process-grid p { font-size: 0.75rem !important; }
+
+            /* Testimonial - compact */
+            .testimonial-card { padding: 1.25rem !important; }
+            .testimonial-card .text-lg { font-size: 0.9rem !important; }
+            .testimonial-card .text-xl { font-size: 1rem !important; }
+            .testimonial-card .w-14 { width: 2.5rem; height: 2.5rem; }
+            .testimonial-card .text-lg.font-bold { font-size: 0.9rem !important; }
+
+            /* Keunggulan - image shorter on mobile */
+            .keunggulan-img { height: 280px !important; }
+            .keunggulan-float-bottom { bottom: -0.5rem; left: -0.5rem; padding: 1rem; }
+            .keunggulan-float-bottom .text-4xl { font-size: 1.75rem !important; }
+            .keunggulan-float-top { top: -0.5rem; right: -0.5rem; padding: 0.75rem; }
+
+            /* CTA section - compact */
+            .cta-card { padding: 1.5rem !important; }
+            .cta-card .text-lg { font-size: 0.9rem !important; }
+
+            /* Footer - compact */
+            footer { padding-top: 2.5rem; padding-bottom: 2.5rem; }
+            footer .gap-12 { gap: 2rem; }
+
+            /* Mobile menu - fit small screens */
+            #mobileMenu { width: 280px !important; }
+
+            /* Floating buttons - no overlap */
+            #backToTop { bottom: 80px; right: 16px; width: 40px; height: 40px; }
+            .wa-float { bottom: 16px; right: 16px; width: 56px; height: 56px; }
+            .wa-float svg { width: 28px; height: 28px; }
+
+            /* Section headings - smaller on mobile */
+            .section-heading { font-size: 1.75rem !important; line-height: 1.2 !important; }
+            .section-subtitle { font-size: 0.85rem; }
+
+            /* Navbar - compact on mobile */
+            nav .py-4 { padding-top: 0.75rem; padding-bottom: 0.75rem; }
+            nav .w-12 { width: 2.5rem; height: 2.5rem; }
+            nav .text-xl { font-size: 1rem; }
+
+            /* Lightbox - better on mobile */
+            #lightbox img { max-width: 95vw; max-height: 75vh; border-radius: 12px; }
+            #lightbox .bottom-8 { bottom: 1.5rem; }
+            #lightbox .text-lg { font-size: 1rem; }
+
+            /* Marquee - faster on mobile */
+            .marquee-track { animation-duration: 20s; gap: 1.5rem; }
+
+            /* Advantages section - stack on mobile */
+            .advantages-grid { grid-template-columns: 1fr !important; gap: 2rem !important; }
+        }
+
+        /* Small phones (320-360px) */
+        @media (max-width: 374px) {
+            .hero-heading { font-size: 2rem !important; }
+            .hero-subtitle { font-size: 1.4rem !important; }
+            .stats-grid .text-3xl { font-size: 1.25rem !important; }
+            .section-heading { font-size: 1.5rem !important; }
+            .service-card-img { height: 150px !important; }
+        }
     </style>
 </head>
 <body>
@@ -465,7 +571,7 @@
 
         <div class="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 text-center">
             <!-- Badge -->
-            <div class="animate-fade-down inline-flex items-center gap-2.5 glass rounded-full px-6 py-2.5 mb-8">
+            <div class="animate-fade-down inline-flex items-center gap-2.5 glass rounded-full px-6 py-2.5 mb-8 hero-badge">
                 <span class="relative flex h-2.5 w-2.5">
                     <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent opacity-75"></span>
                     <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-accent"></span>
@@ -474,18 +580,18 @@
             </div>
 
             <!-- Main heading -->
-            <h1 class="animate-fade-up delay-200 font-heading text-5xl sm:text-6xl md:text-7xl lg:text-[5.5rem] font-black text-white leading-[1.1] mb-6">
+            <h1 class="animate-fade-up delay-200 font-heading text-5xl sm:text-6xl md:text-7xl lg:text-[5.5rem] font-black text-white leading-[1.1] mb-6 hero-heading">
                 Gerobak
                 <span class="block text-transparent bg-clip-text bg-gradient-to-r from-accent via-yellow-300 to-accent-light" style="background-size: 200% auto; animation: shimmer 4s linear infinite;">
                     Berkah
                 </span>
-                <span class="block text-3xl sm:text-4xl md:text-5xl text-silver/60 font-light mt-2 font-body">
+                <span class="block text-3xl sm:text-4xl md:text-5xl text-silver/60 font-light mt-2 font-body hero-subtitle">
                     Untuk Kita Semua
                 </span>
             </h1>
 
             <!-- Subtitle -->
-            <p class="animate-fade-up delay-300 text-silver/60 text-lg sm:text-xl max-w-2xl mx-auto mb-12 leading-relaxed">
+            <p class="animate-fade-up delay-300 text-silver/60 text-lg sm:text-xl max-w-2xl mx-auto mb-12 leading-relaxed hero-desc">
                 Spesialis pembuatan gerobak <strong class="text-white font-semibold">Food & Beverage</strong>, 
                 <strong class="text-white font-semibold">Kiosk Counter Mall</strong>, dan 
                 <strong class="text-white font-semibold">Custom Design</strong> berkualitas tinggi.
@@ -494,19 +600,19 @@
             <!-- CTA Buttons -->
             <div class="animate-fade-up delay-400 flex flex-col sm:flex-row gap-4 justify-center items-center">
                 <a href="https://wa.me/628xxxxxxxxx?text=Halo%20Gerobak%20Ku%2C%20saya%20tertarik%20dengan%20jasa%20pembuatan%20gerobak" 
-                   class="group relative bg-gradient-to-r from-accent to-accent-light text-brown-dark px-10 py-4 rounded-full font-bold text-lg hover:scale-105 transition-all duration-300 shadow-xl shadow-accent/30 flex items-center gap-3 overflow-hidden">
+                   class="group relative bg-gradient-to-r from-accent to-accent-light text-brown-dark px-10 py-4 rounded-full font-bold text-lg hover:scale-105 transition-all duration-300 shadow-xl shadow-accent/30 flex items-center gap-3 overflow-hidden hero-cta">
                     <i data-lucide="message-circle" class="w-5 h-5 relative z-10"></i>
                     <span class="relative z-10">Pesan Sekarang</span>
                     <span class="absolute inset-0 rounded-full animate-shimmer"></span>
                 </a>
-                <a href="#galeri" class="group glass border border-white/20 text-silver-light px-10 py-4 rounded-full font-semibold text-lg hover:border-accent hover:text-accent transition-all duration-300 flex items-center gap-3">
+                <a href="#galeri" class="group glass border border-white/20 text-silver-light px-10 py-4 rounded-full font-semibold text-lg hover:border-accent hover:text-accent transition-all duration-300 flex items-center gap-3 hero-cta">
                     <i data-lucide="play-circle" class="w-5 h-5 group-hover:scale-110 transition-transform"></i>
                     Lihat Portofolio
                 </a>
             </div>
 
             <!-- Stats -->
-            <div class="animate-fade-up delay-600 mt-20 grid grid-cols-3 gap-6 max-w-xl mx-auto">
+            <div class="animate-fade-up delay-600 mt-20 grid grid-cols-3 gap-6 max-w-xl mx-auto stats-grid">
                 <div class="glass rounded-2xl py-5 px-4 text-center hover:bg-white/10 transition-colors duration-300">
                     <div class="text-3xl sm:text-4xl font-heading font-black text-accent" id="counter1" data-target="500">0</div>
                     <div class="text-silver/50 text-xs sm:text-sm mt-1 font-medium">Gerobak Terjual</div>
@@ -583,14 +689,14 @@
     </section>
 
     <!-- ==================== LAYANAN SECTION ==================== -->
-    <section id="layanan" class="py-28 relative">
+    <section id="layanan" class="py-28 relative section-py">
         <div class="section-divider absolute top-0 left-0 right-0"></div>
 
         <div class="max-w-7xl mx-auto px-4 sm:px-6">
             <!-- Section header -->
             <div class="text-center mb-20 reveal">
                 <span class="inline-block text-accent text-xs font-bold tracking-[0.3em] uppercase mb-4 glass rounded-full px-5 py-2">Layanan Kami</span>
-                <h2 class="font-heading text-4xl sm:text-5xl lg:text-6xl font-black text-white mb-5">
+                <h2 class="font-heading text-4xl sm:text-5xl lg:text-6xl font-black text-white mb-5 section-heading">
                     Solusi Gerobak <span class="text-accent">Profesional</span>
                 </h2>
                 <p class="text-silver/50 max-w-2xl mx-auto text-lg leading-relaxed">
@@ -766,13 +872,13 @@
     </section>
 
     <!-- ==================== GALERI SECTION ==================== -->
-    <section id="galeri" class="py-28 relative">
+    <section id="galeri" class="py-28 relative section-py">
         <div class="section-divider absolute top-0 left-0 right-0"></div>
 
         <div class="max-w-7xl mx-auto px-4 sm:px-6">
             <div class="text-center mb-16 reveal">
                 <span class="inline-block text-accent text-xs font-bold tracking-[0.3em] uppercase mb-4 glass rounded-full px-5 py-2">Portofolio</span>
-                <h2 class="font-heading text-4xl sm:text-5xl lg:text-6xl font-black text-white mb-5">
+                <h2 class="font-heading text-4xl sm:text-5xl lg:text-6xl font-black text-white mb-5 section-heading">
                     Hasil Karya <span class="text-accent">Kami</span>
                 </h2>
                 <p class="text-silver/50 max-w-2xl mx-auto text-lg">
@@ -781,7 +887,7 @@
             </div>
 
             <!-- Filter Tabs -->
-            <div class="flex flex-wrap justify-center gap-3 mb-12 reveal">
+            <div class="flex flex-wrap justify-center gap-3 mb-12 reveal filter-scroll">
                 <button class="filter-btn active px-6 py-2.5 rounded-full text-sm font-semibold transition-all duration-300" onclick="filterGallery('all')">Semua</button>
                 <button class="filter-btn px-6 py-2.5 rounded-full text-sm font-semibold transition-all duration-300" onclick="filterGallery('fnb')">Food & Beverage</button>
                 <button class="filter-btn px-6 py-2.5 rounded-full text-sm font-semibold transition-all duration-300" onclick="filterGallery('mall')">Kiosk Mall</button>
@@ -914,13 +1020,13 @@
     </section>
 
     <!-- ==================== PROSES PEMESANAN ==================== -->
-    <section id="proses" class="py-28 relative">
+    <section id="proses" class="py-28 relative section-py">
         <div class="section-divider absolute top-0 left-0 right-0"></div>
 
         <div class="max-w-6xl mx-auto px-4 sm:px-6">
             <div class="text-center mb-20 reveal">
                 <span class="inline-block text-accent text-xs font-bold tracking-[0.3em] uppercase mb-4 glass rounded-full px-5 py-2">Cara Pesan</span>
-                <h2 class="font-heading text-4xl sm:text-5xl lg:text-6xl font-black text-white mb-5">
+                <h2 class="font-heading text-4xl sm:text-5xl lg:text-6xl font-black text-white mb-5 section-heading">
                     Proses <span class="text-accent">Pemesanan</span>
                 </h2>
                 <p class="text-silver/50 max-w-2xl mx-auto text-lg">
@@ -928,7 +1034,7 @@
                 </p>
             </div>
 
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 relative">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 relative process-grid">
                 <!-- Connection line (desktop) -->
                 <div class="hidden lg:block absolute top-10 left-[12.5%] right-[12.5%] h-0.5 bg-gradient-to-r from-accent/20 via-accent/40 to-accent/20"></div>
 
@@ -980,13 +1086,13 @@
     </section>
 
     <!-- ==================== TESTIMONI ==================== -->
-    <section id="testimoni" class="py-28 relative overflow-hidden">
+    <section id="testimoni" class="py-28 relative overflow-hidden section-py">
         <div class="section-divider absolute top-0 left-0 right-0"></div>
 
         <div class="max-w-6xl mx-auto px-4 sm:px-6">
             <div class="text-center mb-16 reveal">
                 <span class="inline-block text-accent text-xs font-bold tracking-[0.3em] uppercase mb-4 glass rounded-full px-5 py-2">Testimoni</span>
-                <h2 class="font-heading text-4xl sm:text-5xl lg:text-6xl font-black text-white mb-5">
+                <h2 class="font-heading text-4xl sm:text-5xl lg:text-6xl font-black text-white mb-5 section-heading">
                     Apa Kata <span class="text-accent">Mereka</span>?
                 </h2>
                 <p class="text-silver/50 max-w-2xl mx-auto text-lg">
@@ -1088,14 +1194,14 @@
     </section>
 
     <!-- ==================== KEUNGGULAN ==================== -->
-    <section class="py-28 relative">
+    <section class="py-28 relative section-py">
         <div class="section-divider absolute top-0 left-0 right-0"></div>
 
         <div class="max-w-6xl mx-auto px-4 sm:px-6">
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center advantages-grid">
                 <div class="reveal-left">
                     <span class="inline-block text-accent text-xs font-bold tracking-[0.3em] uppercase mb-4 glass rounded-full px-5 py-2">Milih Kami</span>
-                    <h2 class="font-heading text-4xl sm:text-5xl font-black text-white mb-6">
+                    <h2 class="font-heading text-4xl sm:text-5xl font-black text-white mb-6 section-heading">
                         Kenapa <span class="text-accent">Gerobak Ku</span>?
                     </h2>
                     <p class="text-silver/50 text-lg mb-10 leading-relaxed">
@@ -1149,17 +1255,17 @@
                     <div class="relative rounded-3xl overflow-hidden">
                         <img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=600&h=700&fit=crop" 
                              alt="Workshop Gerobak Ku" 
-                             class="w-full h-[550px] object-cover"
+                             class="w-full h-[550px] object-cover keunggulan-img"
                              loading="lazy">
                         <div class="absolute inset-0 bg-gradient-to-t from-brown-dark/80 via-transparent to-transparent"></div>
                     </div>
-                    <div class="absolute -bottom-6 -left-6 bg-gradient-to-br from-accent to-accent-light rounded-2xl p-6 shadow-2xl shadow-accent/30 animate-float">
+                    <div class="absolute -bottom-6 -left-6 bg-gradient-to-br from-accent to-accent-light rounded-2xl p-6 shadow-2xl shadow-accent/30 animate-float keunggulan-float-bottom">
                         <div class="text-center">
                             <div class="text-4xl font-heading font-black text-brown-dark">10+</div>
                             <div class="text-brown-dark/70 text-sm font-semibold">Tahun<br>Pengalaman</div>
                         </div>
                     </div>
-                    <div class="absolute -top-4 -right-4 bg-white/10 backdrop-blur-xl rounded-2xl p-4 border border-white/10 animate-float" style="animation-delay: 1s;">
+                    <div class="absolute -top-4 -right-4 bg-white/10 backdrop-blur-xl rounded-2xl p-4 border border-white/10 animate-float keunggulan-float-top" style="animation-delay: 1s;">
                         <div class="flex items-center gap-2">
                             <span class="text-accent text-xl">★</span>
                             <span class="text-white font-bold text-lg">4.9</span>
@@ -1172,13 +1278,13 @@
     </section>
 
     <!-- ==================== FAQ ==================== -->
-    <section id="faq" class="py-28 relative">
+    <section id="faq" class="py-28 relative section-py">
         <div class="section-divider absolute top-0 left-0 right-0"></div>
 
         <div class="max-w-3xl mx-auto px-4 sm:px-6">
             <div class="text-center mb-16 reveal">
                 <span class="inline-block text-accent text-xs font-bold tracking-[0.3em] uppercase mb-4 glass rounded-full px-5 py-2">FAQ</span>
-                <h2 class="font-heading text-4xl sm:text-5xl font-black text-white mb-5">
+                <h2 class="font-heading text-4xl sm:text-5xl font-black text-white mb-5 section-heading">
                     Pertanyaan <span class="text-accent">Umum</span>
                 </h2>
             </div>
@@ -1238,13 +1344,13 @@
     </section>
 
     <!-- ==================== KONTAK / CTA ==================== -->
-    <section id="kontak" class="py-28 relative">
+    <section id="kontak" class="py-28 relative section-py">
         <div class="section-divider absolute top-0 left-0 right-0"></div>
 
         <div class="max-w-5xl mx-auto px-4 sm:px-6 text-center">
             <div class="reveal">
                 <span class="inline-block text-accent text-xs font-bold tracking-[0.3em] uppercase mb-4 glass rounded-full px-5 py-2">Siap Memulai?</span>
-                <h2 class="font-heading text-4xl sm:text-5xl lg:text-6xl font-black text-white mb-6">
+                <h2 class="font-heading text-4xl sm:text-5xl lg:text-6xl font-black text-white mb-6 section-heading">
                     Wujudkan Gerobak <span class="text-accent">Impian Anda</span>
                 </h2>
                 <p class="text-silver/50 text-lg mb-12 max-w-2xl mx-auto leading-relaxed">
@@ -1252,7 +1358,7 @@
                 </p>
             </div>
 
-            <div class="reveal glass rounded-3xl p-8 sm:p-12 max-w-3xl mx-auto animate-glow">
+            <div class="reveal glass rounded-3xl p-8 sm:p-12 max-w-3xl mx-auto animate-glow cta-card">
                 <div class="space-y-8">
                     <a href="https://wa.me/628xxxxxxxxx?text=Halo%20Gerobak%20Ku%2C%20saya%20mau%20konsultasi%20tentang%20pembuatan%20gerobak" 
                        class="relative block w-full bg-gradient-to-r from-[#25D366] to-[#128C7E] text-white py-5 rounded-2xl font-bold text-lg hover:scale-[1.02] transition-all duration-300 shadow-xl shadow-[#25D366]/25 overflow-hidden group">
@@ -1336,7 +1442,7 @@
 
     <!-- ==================== FLOATING WA BUTTON ==================== -->
     <a href="https://wa.me/628xxxxxxxxx?text=Halo%20Gerobak%20Ku%2C%20saya%20mau%20tanya%20tentang%20gerobak" 
-       class="fixed bottom-6 right-6 z-50 wa-pulse bg-[#25D366] text-white w-16 h-16 rounded-full flex items-center justify-center shadow-2xl shadow-[#25D366]/40 hover:scale-110 transition-all duration-300">
+       class="fixed bottom-6 right-6 z-50 wa-pulse bg-[#25D366] text-white w-16 h-16 rounded-full flex items-center justify-center shadow-2xl shadow-[#25D366]/40 hover:scale-110 transition-all duration-300 wa-float">
         <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
             <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
         </svg>

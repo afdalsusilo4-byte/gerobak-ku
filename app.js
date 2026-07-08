@@ -163,8 +163,8 @@ function renderServices(services) {
     if (!grid) return;
 
     grid.innerHTML = services.map((s, i) => `
-        <div class="reveal card-glow group relative bg-gradient-to-b from-white/[0.07] to-transparent rounded-3xl overflow-hidden border border-white/[0.08]" style="animation-delay: ${i * 0.15}s;">
-            <div class="relative h-72 overflow-hidden">
+        <div class="reveal card-glow group relative bg-gradient-to-b from-white/[0.07] to-transparent rounded-3xl overflow-hidden border border-white/[0.08] service-card" style="animation-delay: ${i * 0.15}s;">
+            <div class="relative h-72 overflow-hidden service-card-img">
                 <img src="${s.image}" alt="${s.name}" 
                      class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" loading="lazy">
                 <div class="absolute inset-0 bg-gradient-to-t from-brown-dark via-brown-dark/30 to-transparent"></div>
@@ -172,7 +172,7 @@ function renderServices(services) {
                     ${s.badge}
                 </div>
             </div>
-            <div class="p-8 relative">
+            <div class="p-8 relative service-card-body">
                 <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-accent/20 to-accent/5 flex items-center justify-center mb-5 group-hover:scale-110 transition-transform duration-300 border border-accent/10">
                     <i data-lucide="${s.icon}" class="w-7 h-7 text-accent"></i>
                 </div>
@@ -238,7 +238,7 @@ function renderTestimonials(testimonials) {
 
     track.innerHTML = testimonials.map(t => `
         <div class="w-full flex-shrink-0 px-4">
-            <div class="glass rounded-3xl p-8 sm:p-12 max-w-3xl mx-auto text-center">
+            <div class="glass rounded-3xl p-8 sm:p-12 max-w-3xl mx-auto text-center testimonial-card">
                 <div class="flex justify-center gap-1 mb-6">
                     ${'★'.repeat(t.rating).split('').map(() => '<span class="text-accent text-2xl">★</span>').join('')}
                 </div>
