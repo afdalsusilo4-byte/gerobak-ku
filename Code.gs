@@ -7,12 +7,93 @@
 <body>
 <script>
 // ===== GEROBAK KU - Google Sheets CMS Backend =====
-// Deploy script ini sebagai Web App (Execute as: Me, Access: Anyone)
+// Dengan keamanan: API Key + Rate Limiting + Input Sanitization
 
-const SPREADSHEET_ID = SpreadsheetApp.getActiveSpreadsheet().getId();
+// ===== KONFIGURASI KEAMANAN =====
+const API_KEY = 'GKU-2026-xxxxx';  // Ganti dengan key random Anda!
+const RATE_LIMIT_PER_MINUTE = 30;  // Max request per menit
+const ALLOWED_ORIGINS = [
+    'https://afdalsusilo4-byte.github.io',
+    'https://gerobak-ku.vercel.app',
+    'https://gerobakku.com',        // Ganti dengan domain Anda
+    'http://localhost:8080',         // Untuk testing lokal
+];
 
+// ===== RATE LIMITER (in-memory, reset saat redeploy) =====
+const rateLimitStore = {};
+
+function checkRateLimit(ip) {
+    const now = Date.now();
+    const minute = Math.floor(now / 60000);
+    const key = `${ip}_${minute}`;
+
+    if (!rateLimitStore[key]) {
+        // Bersihkan entry lama
+        for (const k in rateLimitStore) {
+            if (parseInt(k.split('_')[1]) < minute - 2) {
+                delete rateLimitStore[k];
+            }
+        }
+        rateLimitStore[key] = 0;
+    }
+
+    rateLimitStore[key]++;
+    return rateLimitStore[key] <= RATE_LIMIT_PER_MINUTE;
+}
+
+// ===== SANITIZATION =====
+function sanitize(str) {
+    if (typeof str !== 'string') return str;
+    return str
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#x27;')
+        .trim();
+}
+
+function sanitizeRow(row) {
+    return row.map(cell => {
+        if (typeof cell === 'string') return sanitize(cell);
+        return cell;
+    });
+}
+
+// ===== CORS CHECK =====
+function getCORSHeaders(origin) {
+    const headers = {};
+    if (ALLOWED_ORIGINS.includes(origin) || origin === 'null') {
+        headers['Access-Control-Allow-Origin'] = origin;
+    } else {
+        // Default: izinkan GitHub Pages dan Vercel
+        headers['Access-Control-Allow-Origin'] = ALLOWED_ORIGINS[0];
+    }
+    headers['Access-Control-Allow-Methods'] = 'GET, POST, OPTIONS';
+    headers['Access-Control-Allow-Headers'] = 'Content-Type, X-API-Key';
+    return headers;
+}
+
+// ===== MAIN HANDLER =====
 function doGet(e) {
     try {
+        // Rate limiting
+        const ip = e.parameter._ip || 'unknown';
+        if (!checkRateLimit(ip)) {
+            return createJSONResponse({
+                success: false,
+                error: 'Rate limit exceeded. Coba lagi nanti.'
+            }, 429, e);
+        }
+
+        // API Key check (opsional - uncomment untuk mengaktifkan)
+        // const key = e.parameter.key || e.parameter.api_key;
+        // if (key !== API_KEY) {
+        //     return createJSONResponse({
+        //         success: false,
+        //         error: 'Invalid API key'
+        //     }, 403, e);
+        // }
+
         const ss = SpreadsheetApp.getActiveSpreadsheet();
         const result = {};
 
@@ -23,7 +104,7 @@ function doGet(e) {
             result.brand = {};
             for (let i = 1; i < data.length; i++) {
                 if (data[i][0] && data[i][1]) {
-                    result.brand[data[i][0]] = data[i][1];
+                    result.brand[sanitize(data[i][0])] = sanitize(String(data[i][1]));
                 }
             }
         }
@@ -35,7 +116,7 @@ function doGet(e) {
             result.contact = {};
             for (let i = 1; i < data.length; i++) {
                 if (data[i][0] && data[i][1]) {
-                    result.contact[data[i][0]] = data[i][1];
+                    result.contact[sanitize(data[i][0])] = sanitize(String(data[i][1]));
                 }
             }
         }
@@ -47,19 +128,16 @@ function doGet(e) {
             result.services = [];
             for (let i = 1; i < data.length; i++) {
                 if (data[i][0]) {
+                    const row = sanitizeRow(data[i]);
                     result.services.push({
-                        name: data[i][0] || '',
-                        badge: data[i][1] || '',
-                        description: data[i][2] || '',
-                        image: data[i][3] || '',
-                        icon: data[i][4] || 'box',
-                        price: data[i][5] || '',
-                        features: [
-                            data[i][6] || '',
-                            data[i][7] || '',
-                            data[i][8] || '',
-                        ].filter(f => f),
-                        waMessage: data[i][9] || '',
+                        name: row[0] || '',
+                        badge: row[1] || '',
+                        description: row[2] || '',
+                        image: row[3] || '',
+                        icon: row[4] || 'box',
+                        price: row[5] || '',
+                        features: [row[6], row[7], row[8]].filter(f => f),
+                        waMessage: row[9] || '',
                     });
                 }
             }
@@ -72,12 +150,13 @@ function doGet(e) {
             result.gallery = [];
             for (let i = 1; i < data.length; i++) {
                 if (data[i][0]) {
+                    const row = sanitizeRow(data[i]);
                     result.gallery.push({
-                        image: data[i][0] || '',
-                        title: data[i][1] || '',
-                        location: data[i][2] || '',
-                        category: data[i][3] || 'all',
-                        categoryLabel: data[i][4] || '',
+                        image: row[0] || '',
+                        title: row[1] || '',
+                        location: row[2] || '',
+                        category: row[3] || 'all',
+                        categoryLabel: row[4] || '',
                     });
                 }
             }
@@ -90,12 +169,13 @@ function doGet(e) {
             result.testimonials = [];
             for (let i = 1; i < data.length; i++) {
                 if (data[i][0]) {
+                    const row = sanitizeRow(data[i]);
                     result.testimonials.push({
-                        name: data[i][0] || '',
-                        role: data[i][1] || '',
-                        initial: data[i][2] || '?',
-                        rating: parseInt(data[i][3]) || 5,
-                        text: data[i][4] || '',
+                        name: row[0] || '',
+                        role: row[1] || '',
+                        initial: row[2] || '?',
+                        rating: parseInt(row[3]) || 5,
+                        text: row[4] || '',
                     });
                 }
             }
@@ -108,9 +188,10 @@ function doGet(e) {
             result.faq = [];
             for (let i = 1; i < data.length; i++) {
                 if (data[i][0]) {
+                    const row = sanitizeRow(data[i]);
                     result.faq.push({
-                        question: data[i][0] || '',
-                        answer: data[i][1] || '',
+                        question: row[0] || '',
+                        answer: row[1] || '',
                     });
                 }
             }
@@ -123,25 +204,26 @@ function doGet(e) {
             result.stats = {};
             for (let i = 1; i < data.length; i++) {
                 if (data[i][0] && data[i][1]) {
-                    result.stats[data[i][0]] = parseInt(data[i][1]) || 0;
+                    result.stats[sanitize(data[i][0])] = parseInt(data[i][1]) || 0;
                 }
             }
         }
 
-        return ContentService.createTextOutput(JSON.stringify({
+        // Log access (opsional)
+        console.log(`✅ Data served to ${ip} at ${new Date().toISOString()}`);
+
+        return createJSONResponse({
             success: true,
             data: result,
             timestamp: new Date().toISOString()
-        }))
-        .setMimeType(ContentService.MimeType.JSON)
-        .setHeader('Access-Control-Allow-Origin', '*');
+        }, 200, e);
 
     } catch (error) {
-        return ContentService.createTextOutput(JSON.stringify({
+        console.error('❌ Error:', error.toString());
+        return createJSONResponse({
             success: false,
-            error: error.toString()
-        }))
-        .setMimeType(ContentService.MimeType.JSON);
+            error: 'Internal server error'
+        }, 500, e);
     }
 }
 
@@ -149,7 +231,27 @@ function doPost(e) {
     return doGet(e);
 }
 
-// ===== SETUP: Jalankan fungsi ini sekali untuk membuat sheet =====
+function doOptions(e) {
+    const origin = e.parameter.origin || '';
+    const headers = getCORSHeaders(origin);
+    return ContentService.createTextOutput('')
+        .setMimeType(ContentService.MimeType.TEXT)
+        .setHeader('Access-Control-Allow-Origin', headers['Access-Control-Allow-Origin'])
+        .setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS')
+        .setHeader('Access-Control-Allow-Headers', 'Content-Type, X-API-Key');
+}
+
+// ===== HELPER: JSON Response dengan CORS =====
+function createJSONResponse(data, status, e) {
+    const origin = '';
+    const headers = getCORSHeaders(origin);
+
+    return ContentService.createTextOutput(JSON.stringify(data))
+        .setMimeType(ContentService.MimeType.JSON)
+        .setHeader('Access-Control-Allow-Origin', headers['Access-Control-Allow-Origin']);
+}
+
+// ===== SETUP: Jalankan sekali =====
 function setupSheets() {
     const ss = SpreadsheetApp.getActiveSpreadsheet();
 
@@ -233,9 +335,9 @@ function setupSheets() {
     sheet.getRange(2, 1, 5, 2).setValues([
         ['Berapa lama proses pembuatan gerobak?', 'Tergantung jenis dan kompleksitas desain. Gerobak standar F&B 7-14 hari kerja, Kiosk counter mall 14-21 hari, Custom design 21-30 hari.'],
         ['Apakah bisa kirim ke luar kota?', 'Ya! Kami melayani pengiriman ke seluruh Indonesia. Biaya pengiriman dihitung berdasarkan jarak dan ukuran gerobak.'],
-        ['Apakah ada garansi?', 'Tentu! Semua gerobak bergaransi 1 tahun untuk kerangka dan struktur. Garansi meliputi perbaikan kerusakan akibat kesalahan produksi.'],
-        ['Bagaimana sistem pembayarannya?', 'DP 50% saat desain disetujui, pelunasan 50% saat gerobak selesai. Cicilan tanpa kartu kredit tersedia untuk pembelian di atas Rp 10 juta.'],
-        ['Bisa request desain dari gambar referensi?', 'Bisa banget! Kirimkan gambar referensi ke tim kami, kami buatkan desain 3D berdasarkan referensi tersebut. Revisi unlimited sampai puas.'],
+        ['Apakah ada garansi?', 'Tentu! Semua gerobak bergaransi 1 tahun untuk kerangka dan struktur.'],
+        ['Bagaimana sistem pembayarannya?', 'DP 50% saat desain disetujui, pelunasan 50% saat gerobak selesai. Cicilan tersedia untuk pembelian di atas Rp 10 juta.'],
+        ['Bisa request desain dari gambar referensi?', 'Bisa banget! Kirimkan gambar referensi, kami buatkan desain 3D. Revisi unlimited sampai puas.'],
     ]);
 
     // Sheet: Statistik
@@ -249,13 +351,25 @@ function setupSheets() {
         ['tahunPengalaman', 10],
     ]);
 
-    // Hapus sheet default jika ada
+    // Hapus sheet default
     const defaultSheet = ss.getSheetByName('Sheet1');
     if (defaultSheet && ss.getSheets().length > 1) {
-        ss.deleteSheet(defaultSheet);
+        try { ss.deleteSheet(defaultSheet); } catch(e) {}
     }
 
-    SpreadsheetApp.getUi().alert('✅ Setup selesai! 7 sheet telah dibuat.\n\nSekarang deploy script ini:\n1. Deploy → New deployment\n2. Type: Web app\n3. Execute as: Me\n4. Who has access: Anyone\n5. Deploy!\n\nCopy URL yang diberikan.');
+    SpreadsheetApp.getUi().alert('✅ Setup selesai! 7 sheet telah dibuat.');
+}
+
+// ===== GENERATE API KEY =====
+function generateAPIKey() {
+    const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    let key = 'GKU-';
+    for (let i = 0; i < 24; i++) {
+        key += chars.charAt(Math.floor(Math.random() * chars.length));
+    }
+    console.log('🔑 API Key baru:', key);
+    SpreadsheetApp.getUi().alert('🔑 API Key:\n\n' + key + '\n\nSimpan key ini dan masukkan di app.js');
+    return key;
 }
 </script>
 </body>

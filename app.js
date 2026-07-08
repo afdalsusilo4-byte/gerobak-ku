@@ -4,6 +4,7 @@
 // ===== KONFIGURASI =====
 // Ganti URL di bawah dengan URL Web App Google Apps Script kamu
 const CMS_URL = ''; // Kosongkan untuk pakai data default
+const API_KEY = '';  // Opsional: API key untuk keamanan tambahan
 
 // ===== DATA DEFAULT (jika CMS tidak tersedia) =====
 const DEFAULT_DATA = {
@@ -82,7 +83,16 @@ async function fetchCMSData() {
 
     try {
         console.log('🔄 Mengambil data dari Google Sheets...');
-        const response = await fetch(CMS_URL);
+        const url = new URL(CMS_URL);
+        if (API_KEY) {
+            url.searchParams.set('key', API_KEY);
+        }
+        const response = await fetch(url.toString(), {
+            method: 'GET',
+            headers: {
+                'Accept': 'application/json',
+            },
+        });
         const result = await response.json();
 
         if (result.success && result.data) {
